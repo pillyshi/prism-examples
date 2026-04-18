@@ -8,7 +8,10 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "prism-text @ git+https://github.com/pillyshi/prism"
+    "prism-text @ git+https://github.com/pillyshi/prism",
+    "protobuf (>=7.34.1,<8.0.0)",
+    "fugashi (>=1.5.2,<2.0.0)",
+    "unidic-lite (>=1.0.8,<2.0.0)"
 ]
 
 

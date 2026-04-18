@@ -1,4 +1,4 @@
-"""Prism feature analysis for SMDIS dataset (all 8 symptom tags)."""
+"""Prism axis discovery and feature analysis for SMDIS dataset."""
 
 from __future__ import annotations
 
@@ -11,56 +11,14 @@ import subprocess
 from pathlib import Path
 
 from prism import Prism
-from prism.models import Axis, AxisLabels
 
 
 REPO = "sociocom/JMED-LLM"
-DATASET_SMALL = "datasets/smdis.csv"
-DATASET_ALL = "datasets/all/SMDIS.csv"
+DATASET_SMALL_LOCAL = "datasets/smdis.csv"
+DATASET_SMALL_GH = "datasets/smdis.csv"
+DATASET_ALL_LOCAL = "datasets/SMDIS.csv"
+DATASET_ALL_GH = "datasets/all/SMDIS.csv"
 RESULTS_DIR = Path("results")
-
-AXES: dict[str, Axis] = {
-    "influenza": Axis(
-        name="influenza",
-        question="Does this SNS post indicate the person or someone nearby had influenza within a day?",
-        hypothesis="This SNS post indicates the person had influenza.",
-    ),
-    "diarrhea": Axis(
-        name="diarrhea",
-        question="Does this SNS post indicate the person or someone nearby had diarrhea within a day?",
-        hypothesis="This SNS post indicates the person had diarrhea.",
-    ),
-    "hayfever": Axis(
-        name="hayfever",
-        question="Does this SNS post indicate the person or someone nearby had hay fever symptoms within a day?",
-        hypothesis="This SNS post indicates the person had hay fever.",
-    ),
-    "cough": Axis(
-        name="cough",
-        question="Does this SNS post indicate the person or someone nearby had a cough or phlegm within a day?",
-        hypothesis="This SNS post indicates the person had a cough.",
-    ),
-    "headache": Axis(
-        name="headache",
-        question="Does this SNS post indicate the person or someone nearby had a headache within a day?",
-        hypothesis="This SNS post indicates the person had a headache.",
-    ),
-    "fever": Axis(
-        name="fever",
-        question="Does this SNS post indicate the person or someone nearby had a fever within a day?",
-        hypothesis="This SNS post indicates the person had a fever.",
-    ),
-    "runnynose": Axis(
-        name="runnynose",
-        question="Does this SNS post indicate the person or someone nearby had a runny nose or nasal congestion within a day?",
-        hypothesis="This SNS post indicates the person had a runny nose or nasal congestion.",
-    ),
-    "cold": Axis(
-        name="cold",
-        question="Does this SNS post indicate the person or someone nearby had a cold within a day?",
-        hypothesis="This SNS post indicates the person had a cold.",
-    ),
-}
 
 
 def download_if_missing(local_path: str, gh_path: str) -> None:
@@ -81,85 +39,90 @@ def download_if_missing(local_path: str, gh_path: str) -> None:
     print(f"Saved to {local_path}")
 
 
-def load_smdis(path: str, tag: str) -> tuple[list[str], list[float]]:
-    texts, labels = [], []
+def load_texts(path: str) -> list[str]:
+    seen: set[str] = set()
+    texts: list[str] = []
     with open(path) as f:
         for row in csv.DictReader(f):
-            if row["tag"] != tag:
-                continue
             post = row["question"].split("「")[1].split("」")[0]
-            texts.append(post)
-            labels.append(1.0 if row["answer"] == "A" else -1.0)
-    return texts, labels
+            if post not in seen:
+                seen.add(post)
+                texts.append(post)
+    return texts
 
 
-def run_tag(prism: Prism, tag: str, texts: list[str], labels: list[float]) -> dict:
-    axis = AXES[tag]
-    axis_labels = AxisLabels(axis=axis, labels=labels)
+def run(prism: Prism, texts: list[str], n_axes: int) -> dict:
+    print(f"Discovering {n_axes} axes ...")
+    axes = prism.discover_axes(texts, n=n_axes, language="Japanese")
+    print(f"Discovered {len(axes)} axes:")
+    for ax in axes:
+        print(f"  - {ax.name}")
 
-    print(f"  Generating features for {tag} ...")
-    features_by_axis = prism.generate_features(texts, [axis], axes_labels=[axis_labels])
+    print("Labeling texts per axis (NLI) ...")
+    axes_labels = prism.label_axes(texts, axes)
 
-    print(f"  Scoring {len(texts)} texts with NLI ...")
-    matrices = prism.score(texts, features_by_axis, axes_labels=[axis_labels])
+    print("Generating features ...")
+    features_by_axis = prism.generate_features(texts, axes, axes_labels=axes_labels, language="Japanese")
 
+    print("Scoring with NLI ...")
+    matrices = prism.score(texts, features_by_axis, axes_labels=axes_labels)
+
+    print("Selecting features ...")
     results, _ = prism.select(matrices)
-    result = results[axis]
-    features = features_by_axis[axis]
 
-    return {
-        "tag": tag,
-        "n_texts": len(texts),
-        "n_positive": labels.count(1.0),
-        "n_negative": labels.count(-1.0),
-        "cv_score": result.cv_score,
-        "cv_scoring": result.cv_scoring,
-        "features": [
-            {"name": f.name, "question": f.question, "hypothesis": f.hypothesis}
-            for f in features
-        ],
-        "selected": [
-            {"name": f.name, "coef": c}
-            for f, c in zip(result.selected_features, result.coef)
-        ],
-    }
+    output_axes = []
+    for axis in axes:
+        result = results[axis]
+        output_axes.append({
+            "name": axis.name,
+            "question": axis.question,
+            "hypothesis": axis.hypothesis,
+            "cv_score": result.cv_score,
+            "cv_scoring": result.cv_scoring,
+            "selected_features": [
+                {"name": f.name, "coef": c}
+                for f, c in zip(result.selected_features, result.coef)
+            ],
+        })
+
+    return {"n_texts": len(texts), "axes": output_axes}
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="SMDIS feature analysis with Prism")
+    parser = argparse.ArgumentParser(description="SMDIS axis discovery and feature analysis with Prism")
     parser.add_argument("--all", action="store_true", help="Use full dataset (datasets/all/SMDIS.csv)")
+    parser.add_argument("--n-axes", type=int, default=10, help="Number of axes to discover")
     args = parser.parse_args()
 
     if args.all:
-        local_path = DATASET_ALL.replace("datasets/all/", "datasets/")
-        gh_path = DATASET_ALL
+        local_path, gh_path = DATASET_ALL_LOCAL, DATASET_ALL_GH
     else:
-        local_path = DATASET_SMALL
-        gh_path = DATASET_SMALL
+        local_path, gh_path = DATASET_SMALL_LOCAL, DATASET_SMALL_GH
 
     download_if_missing(local_path, gh_path)
 
+    texts = load_texts(local_path)
+    print(f"Loaded {len(texts)} unique texts")
+
     prism = Prism(
         llm=os.environ.get("PRISM_LLM", "gpt-4o-mini"),
-        nli_model="cross-encoder/nli-deberta-v3-large",
+        nli_model="MoritzLaurer/mDeBERTa-v3-base-mnli-xnli",
         mode="classification",
     )
 
     RESULTS_DIR.mkdir(exist_ok=True)
 
-    for tag in AXES:
-        texts, labels = load_smdis(local_path, tag)
-        print(f"\n[{tag}] {len(texts)} texts (pos={labels.count(1)}, neg={labels.count(-1)})")
+    output = run(prism, texts, args.n_axes)
 
-        output = run_tag(prism, tag, texts, labels)
+    out_path = RESULTS_DIR / "discover.json"
+    out_path.write_text(json.dumps(output, ensure_ascii=False, indent=2))
 
-        out_path = RESULTS_DIR / f"{tag}.json"
-        out_path.write_text(json.dumps(output, ensure_ascii=False, indent=2))
-
-        print(f"  Selected features:")
-        for s in output["selected"]:
-            print(f"    [{s['coef']:+.3f}] {s['name']}")
-        print(f"  Saved to {out_path}")
+    print(f"\n=== Results ===")
+    for ax in output["axes"]:
+        print(f"[{ax['name']}] cv={ax['cv_score']:.3f}")
+        for f in ax["selected_features"]:
+            print(f"  [{f['coef']:+.3f}] {f['name']}")
+    print(f"\nSaved to {out_path}")
 
 
 if __name__ == "__main__":
