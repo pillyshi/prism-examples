@@ -3,90 +3,84 @@
   "n_texts": 1920,
   "n_positive": 227,
   "n_negative": 1693,
+  "cv_score": 0.03956043956043956,
+  "cv_scoring": "f1",
   "features": [
     {
-      "name": "Mentions symptoms explicitly",
-      "question": "Does this text detail symptoms like fever or cough?",
-      "hypothesis": "This text details symptoms like fever or cough."
+      "name": "Mentions cough or phlegm",
+      "question": "Does this text mention a cough or phlegm?",
+      "hypothesis": "This text mentions a cough or phlegm."
     },
     {
-      "name": "Expresses physical discomfort",
-      "question": "Does this text express discomfort or pain related to cough or throat?",
-      "hypothesis": "This text expresses discomfort or pain related to cough or throat."
+      "name": "Expresses discomfort from illness",
+      "question": "Does this text express discomfort due to illness?",
+      "hypothesis": "This text expresses discomfort due to illness."
     },
     {
-      "name": "References medication usage",
-      "question": "Does this text mention taking medication for cough or related symptoms?",
-      "hypothesis": "This text mentions taking medication for cough or related symptoms."
+      "name": "Discusses symptoms of illness",
+      "question": "Does this text discuss symptoms related to cough or phlegm?",
+      "hypothesis": "This text discusses symptoms related to cough or phlegm."
     },
     {
-      "name": "Discusses experiencing cough",
-      "question": "Does this text indicate experiencing a cough or throat issue recently?",
-      "hypothesis": "This text indicates experiencing a cough or throat issue recently."
+      "name": "Indicates treatment for cough",
+      "question": "Does this text mention a treatment for cough or phlegm?",
+      "hypothesis": "This text mentions a treatment for cough or phlegm."
     },
     {
-      "name": "Mentions flu symptoms",
-      "question": "Does this text mention flu-like symptoms such as fever or weakness?",
-      "hypothesis": "This text mentions flu-like symptoms such as fever or weakness."
+      "name": "Refers to etiquette during coughing",
+      "question": "Does this text refer to etiquette regarding coughing?",
+      "hypothesis": "This text refers to etiquette regarding coughing."
     },
     {
-      "name": "Expresses concern about health",
-      "question": "Does this text show concern about worsening health or symptoms?",
-      "hypothesis": "This text shows concern about worsening health or symptoms."
+      "name": "Mentions visiting a doctor",
+      "question": "Does this text mention visiting a medical professional for illness?",
+      "hypothesis": "This text mentions visiting a medical professional for illness."
     },
     {
-      "name": "Indicates mask use in public",
-      "question": "Does this text suggest using a mask due to coughing or sickness in public?",
-      "hypothesis": "This text suggests using a mask due to coughing or sickness in public."
+      "name": "Talks about medicine or remedies",
+      "question": "Does this text talk about taking medicine or remedies for cough or phlegm?",
+      "hypothesis": "This text talks about taking medicine or remedies for cough or phlegm."
     },
     {
-      "name": "Mentions impact on daily life",
-      "question": "Does this text mention how symptoms are affecting daily activities or responsibilities?",
-      "hypothesis": "This text mentions how symptoms are affecting daily activities or responsibilities."
+      "name": "Indicates high fever context",
+      "question": "Does this text indicate a context of high fever alongside cough?",
+      "hypothesis": "This text indicates a context of high fever alongside cough."
     },
     {
-      "name": "Describes preventative actions",
-      "question": "Does this text talk about taking actions to prevent cough or illness?",
-      "hypothesis": "This text talks about taking actions to prevent cough or illness."
+      "name": "Describes fatigue due to illness",
+      "question": "Does this text describe fatigue or tiredness caused by illness?",
+      "hypothesis": "This text describes fatigue or tiredness caused by illness."
     },
     {
-      "name": "Relates personal experiences with cough",
-      "question": "Does this text include personal anecdotes related to cough or throat issues?",
-      "hypothesis": "This text includes personal anecdotes related to cough or throat issues."
+      "name": "Mentions symptoms affecting daily life",
+      "question": "Does this text mention how symptoms are affecting daily activities?",
+      "hypothesis": "This text mentions how symptoms are affecting daily activities."
     }
   ],
   "selected": [
     {
-      "name": "Mentions symptoms explicitly",
-      "coef": 0.12544962267707774
+      "name": "Discusses symptoms of illness",
+      "coef": 1.3447953353371598
     },
     {
-      "name": "Expresses physical discomfort",
-      "coef": 0.241641785846419
+      "name": "Indicates treatment for cough",
+      "coef": 1.6722635519280384
     },
     {
-      "name": "Mentions flu symptoms",
-      "coef": 0.08889093548581846
+      "name": "Talks about medicine or remedies",
+      "coef": -0.028829576115219413
     },
     {
-      "name": "Expresses concern about health",
-      "coef": 0.08387968888830433
+      "name": "Indicates high fever context",
+      "coef": -0.24529636513480596
     },
     {
-      "name": "Indicates mask use in public",
-      "coef": -0.09548008351377217
+      "name": "Describes fatigue due to illness",
+      "coef": 1.5360628804352154
     },
     {
-      "name": "Mentions impact on daily life",
-      "coef": 0.004471756706900424
-    },
-    {
-      "name": "Describes preventative actions",
-      "coef": -0.008484074541401224
-    },
-    {
-      "name": "Relates personal experiences with cough",
-      "coef": -0.050908985749211474
+      "name": "Mentions symptoms affecting daily life",
+      "coef": -0.673350228953471
     }
   ]
 }

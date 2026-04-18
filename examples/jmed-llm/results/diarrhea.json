@@ -3,98 +3,92 @@
   "n_texts": 1920,
   "n_positive": 182,
   "n_negative": 1738,
+  "cv_score": 0.24473316283034957,
+  "cv_scoring": "f1",
   "features": [
     {
-      "name": "Mentions diarrhea directly",
-      "question": "Does this text mention diarrhea directly?",
-      "hypothesis": "This text mentions diarrhea directly."
+      "name": "Direct mention of diarrhea",
+      "question": "Does this text mention the word 'diarrhea' explicitly?",
+      "hypothesis": "This text mentions the word 'diarrhea' explicitly."
     },
     {
-      "name": "Describes physical discomfort",
-      "question": "Does this text describe physical discomfort related to diarrhea?",
-      "hypothesis": "This text describes physical discomfort related to diarrhea."
+      "name": "Description of related symptoms",
+      "question": "Does this text describe symptoms that are commonly associated with diarrhea?",
+      "hypothesis": "This text describes symptoms that are commonly associated with diarrhea."
     },
     {
-      "name": "Timeframe of symptoms",
-      "question": "Does this text indicate symptoms occurred within the last day?",
-      "hypothesis": "This text indicates symptoms occurred within the last day."
+      "name": "Urgency for toilet access",
+      "question": "Does this text express a need for immediate access to a bathroom?",
+      "hypothesis": "This text expresses a need for immediate access to a bathroom."
     },
     {
-      "name": "Work-related illness mention",
-      "question": "Does this text mention needing to take time off work due to illness?",
-      "hypothesis": "This text mentions needing to take time off work due to illness."
+      "name": "Frequent bathroom trips",
+      "question": "Does this text mention multiple trips to the bathroom within a short period?",
+      "hypothesis": "This text mentions multiple trips to the bathroom within a short period."
     },
     {
-      "name": "Mentions specific food triggers",
-      "question": "Does this text mention specific food that triggered diarrhea?",
-      "hypothesis": "This text mentions specific food that triggered diarrhea."
+      "name": "Comparison to past experiences",
+      "question": "Does this text compare the current situation to a past experience with diarrhea?",
+      "hypothesis": "This text compares the current situation to a past experience with diarrhea."
     },
     {
-      "name": "Describes milder symptoms",
-      "question": "Does this text describe milder symptoms without mentioning diarrhea?",
-      "hypothesis": "This text describes milder symptoms without mentioning diarrhea."
+      "name": "Expression of discomfort",
+      "question": "Does this text express discomfort or distress related to gastrointestinal issues?",
+      "hypothesis": "This text expresses discomfort or distress related to gastrointestinal issues."
     },
     {
-      "name": "General health concerns",
-      "question": "Does this text express general health concerns without specific mention of diarrhea?",
-      "hypothesis": "This text expresses general health concerns without specific mention of diarrhea."
+      "name": "Negative impact on daily activities",
+      "question": "Does this text indicate that diarrhea affects the person's ability to perform daily tasks?",
+      "hypothesis": "This text indicates that diarrhea affects the person's ability to perform daily tasks."
     },
     {
-      "name": "Focus on different diagnoses",
-      "question": "Does this text focus on other diagnoses like flu or cold instead of diarrhea?",
-      "hypothesis": "This text focuses on other diagnoses like flu or cold instead of diarrhea."
+      "name": "Mention of food-related causes",
+      "question": "Does this text suggest that food or a specific meal caused the diarrhea?",
+      "hypothesis": "This text suggests that food or a specific meal caused the diarrhea."
     },
     {
-      "name": "Mentions non-diarrhea related symptoms",
-      "question": "Does this text describe symptoms like headaches or fatigue without mentioning diarrhea?",
-      "hypothesis": "This text describes symptoms like headaches or fatigue without mentioning diarrhea."
+      "name": "Severity of symptoms",
+      "question": "Does this text describe severe symptoms that indicate the presence of diarrhea?",
+      "hypothesis": "This text describes severe symptoms that indicate the presence of diarrhea."
     },
     {
-      "name": "Describes social situations",
-      "question": "Does this text describe social situations without mentioning diarrhea?",
-      "hypothesis": "This text describes social situations without mentioning diarrhea."
+      "name": "Absence of diarrhea mentions",
+      "question": "Does this text explicitly state that the person does not have diarrhea?",
+      "hypothesis": "This text explicitly states that the person does not have diarrhea."
     }
   ],
   "selected": [
     {
-      "name": "Mentions diarrhea directly",
-      "coef": 0.6697008282444272
+      "name": "Direct mention of diarrhea",
+      "coef": -2.2704089887540166
     },
     {
-      "name": "Describes physical discomfort",
-      "coef": -0.0891241166083881
+      "name": "Description of related symptoms",
+      "coef": -0.03729661455392619
     },
     {
-      "name": "Timeframe of symptoms",
-      "coef": -0.10013687517472718
+      "name": "Urgency for toilet access",
+      "coef": -0.3607091788671064
     },
     {
-      "name": "Work-related illness mention",
-      "coef": -0.08698115020098439
+      "name": "Frequent bathroom trips",
+      "coef": 0.2882778977713097
     },
     {
-      "name": "Mentions specific food triggers",
-      "coef": 0.18676178643581182
+      "name": "Comparison to past experiences",
+      "coef": 0.7178310893471139
     },
     {
-      "name": "Describes milder symptoms",
-      "coef": 0.09315399839237215
+      "name": "Negative impact on daily activities",
+      "coef": 2.3229403868733476
     },
     {
-      "name": "General health concerns",
-      "coef": 0.07140185675433448
+      "name": "Severity of symptoms",
+      "coef": 1.7984252445430209
     },
     {
-      "name": "Focus on different diagnoses",
-      "coef": -0.0365485455679708
-    },
-    {
-      "name": "Mentions non-diarrhea related symptoms",
-      "coef": -0.4967862232700763
-    },
-    {
-      "name": "Describes social situations",
-      "coef": -0.1524198332184401
+      "name": "Absence of diarrhea mentions",
+      "coef": -573.9723770782135
     }
   ]
 }

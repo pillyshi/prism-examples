@@ -3,94 +3,96 @@
   "n_texts": 1920,
   "n_positive": 163,
   "n_negative": 1757,
+  "cv_score": 0.021621621621621623,
+  "cv_scoring": "f1",
   "features": [
     {
-      "name": "Mentions specific symptoms of hay fever",
-      "question": "Does this text mention specific symptoms related to hay fever?",
-      "hypothesis": "This text mentions specific symptoms related to hay fever."
+      "name": "Mentions of hay fever symptoms",
+      "question": "Does this text mention symptoms associated with hay fever?",
+      "hypothesis": "This text mentions symptoms associated with hay fever."
     },
     {
-      "name": "Indicates recent diagnosis of hay fever",
-      "question": "Does this text indicate that the person was recently diagnosed with hay fever?",
-      "hypothesis": "This text indicates that the person was recently diagnosed with hay fever."
+      "name": "Discussion of treatment options",
+      "question": "Does this text discuss treatment options for hay fever?",
+      "hypothesis": "This text discusses treatment options for hay fever."
     },
     {
-      "name": "Expresses frustration from hay fever",
-      "question": "Does this text express frustration related to hay fever symptoms?",
-      "hypothesis": "This text expresses frustration related to hay fever symptoms."
+      "name": "Personal experience with hay fever",
+      "question": "Does this text describe a personal experience related to hay fever?",
+      "hypothesis": "This text describes a personal experience related to hay fever."
     },
     {
-      "name": "Mentions medication for hay fever",
-      "question": "Does this text mention taking medication specifically for hay fever?",
-      "hypothesis": "This text mentions taking medication specifically for hay fever."
+      "name": "Feeling overwhelmed by symptoms",
+      "question": "Does this text express feeling overwhelmed by hay fever symptoms?",
+      "hypothesis": "This text expresses feeling overwhelmed by hay fever symptoms."
     },
     {
-      "name": "Talks about hay fever season",
-      "question": "Does this text reference the season associated with hay fever?",
-      "hypothesis": "This text references the season associated with hay fever."
+      "name": "Mention of seasonal allergies",
+      "question": "Does this text mention a specific season associated with hay fever?",
+      "hypothesis": "This text mentions a specific season associated with hay fever."
     },
     {
-      "name": "Mentions a different illness instead",
-      "question": "Does this text mention symptoms related to a different illness instead of hay fever?",
-      "hypothesis": "This text mentions symptoms related to a different illness instead of hay fever."
+      "name": "Expressions of frustration or despair",
+      "question": "Does this text express frustration or despair related to hay fever?",
+      "hypothesis": "This text expresses frustration or despair related to hay fever."
     },
     {
-      "name": "Describes ongoing flu or cold symptoms",
-      "question": "Does this text describe ongoing symptoms related to a flu or cold?",
-      "hypothesis": "This text describes ongoing symptoms related to a flu or cold."
+      "name": "Indication of need for personal remedies",
+      "question": "Does this text indicate a need for personal remedies or medication for hay fever?",
+      "hypothesis": "This text indicates a need for personal remedies or medication for hay fever."
     },
     {
-      "name": "Expresses relief from non-hay fever symptoms",
-      "question": "Does this text express relief from symptoms not related to hay fever?",
-      "hypothesis": "This text expresses relief from symptoms not related to hay fever."
+      "name": "Request for advice on hay fever",
+      "question": "Does this text request advice or tips for managing hay fever?",
+      "hypothesis": "This text requests advice or tips for managing hay fever."
     },
     {
-      "name": "Indicates no awareness of hay fever symptoms",
-      "question": "Does this text indicate the person is not aware of what hay fever symptoms are?",
-      "hypothesis": "This text indicates the person is not aware of what hay fever symptoms are."
+      "name": "Mention of allergies without symptoms",
+      "question": "Does this text mention allergies but does not describe any symptoms?",
+      "hypothesis": "This text mentions allergies but does not describe any symptoms."
     },
     {
-      "name": "Suggests preventive measures for other illnesses",
-      "question": "Does this text suggest preventive measures for illnesses other than hay fever?",
-      "hypothesis": "This text suggests preventive measures for illnesses other than hay fever."
+      "name": "Focus on other unrelated symptoms",
+      "question": "Does this text emphasize symptoms unrelated to hay fever?",
+      "hypothesis": "This text emphasizes symptoms unrelated to hay fever."
     }
   ],
   "selected": [
     {
-      "name": "Mentions specific symptoms of hay fever",
-      "coef": -0.1894365991493738
+      "name": "Mentions of hay fever symptoms",
+      "coef": -34.5603984907914
     },
     {
-      "name": "Indicates recent diagnosis of hay fever",
-      "coef": -0.173811586479432
+      "name": "Discussion of treatment options",
+      "coef": 1.4569948800417947
     },
     {
-      "name": "Mentions medication for hay fever",
-      "coef": -0.002675356769521484
+      "name": "Personal experience with hay fever",
+      "coef": -0.11689048047185825
     },
     {
-      "name": "Talks about hay fever season",
-      "coef": 0.03644317407819271
+      "name": "Feeling overwhelmed by symptoms",
+      "coef": -84.6717171067565
     },
     {
-      "name": "Mentions a different illness instead",
-      "coef": -0.019566660091673082
+      "name": "Mention of seasonal allergies",
+      "coef": -2.162883016342421
     },
     {
-      "name": "Describes ongoing flu or cold symptoms",
-      "coef": -0.14125489770291133
+      "name": "Expressions of frustration or despair",
+      "coef": -0.3534852040604486
     },
     {
-      "name": "Expresses relief from non-hay fever symptoms",
-      "coef": 0.019571056059946055
+      "name": "Indication of need for personal remedies",
+      "coef": 1.3399217146862967
     },
     {
-      "name": "Indicates no awareness of hay fever symptoms",
-      "coef": -0.14481882750853298
+      "name": "Request for advice on hay fever",
+      "coef": 0.9050354196365403
     },
     {
-      "name": "Suggests preventive measures for other illnesses",
-      "coef": 0.27601021728500424
+      "name": "Mention of allergies without symptoms",
+      "coef": -1.3955481711329312
     }
   ]
 }

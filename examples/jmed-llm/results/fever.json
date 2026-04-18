@@ -3,98 +3,84 @@
   "n_texts": 1920,
   "n_positive": 345,
   "n_negative": 1575,
+  "cv_score": 0.6063817150411451,
+  "cv_scoring": "f1",
   "features": [
     {
-      "name": "Mentions fever symptoms",
-      "question": "Does this text reference fever symptoms such as high temperature or chills?",
-      "hypothesis": "This text references fever symptoms such as high temperature or chills."
+      "name": "Fever Mentioned",
+      "question": "Does this text mention having a fever explicitly?",
+      "hypothesis": "This text mentions having a fever explicitly."
     },
     {
-      "name": "Indicates illness experience",
-      "question": "Does this text indicate a personal experience with illness such as fever, flu, or cold?",
-      "hypothesis": "This text indicates a personal experience with illness such as fever, flu, or cold."
+      "name": "Symptoms Describe High Temperature",
+      "question": "Does this text describe symptoms indicating a high temperature?",
+      "hypothesis": "This text describes symptoms indicating a high temperature."
     },
     {
-      "name": "Mentions medical consultation",
-      "question": "Does this text mention a visit to a doctor or medical advice regarding a fever?",
-      "hypothesis": "This text mentions a visit to a doctor or medical advice regarding a fever."
+      "name": "Recent Fever Confirmation",
+      "question": "Does this text confirm a recent fever occurrence?",
+      "hypothesis": "This text confirms a recent fever occurrence."
     },
     {
-      "name": "Describes high fever condition",
-      "question": "Does this text describe a condition related to having a high fever or prolonged fever?",
-      "hypothesis": "This text describes a condition related to having a high fever or prolonged fever."
+      "name": "Condition Likely Influenza",
+      "question": "Does this text imply the person's condition is likely influenza based on symptoms?",
+      "hypothesis": "This text implies the person's condition is likely influenza based on symptoms."
     },
     {
-      "name": "Reports family illness impact",
-      "question": "Does this text discuss a family member or someone close having a fever or illness?",
-      "hypothesis": "This text discusses a family member or someone close having a fever or illness."
+      "name": "Family Member's Fever",
+      "question": "Does this text mention that a family member has a fever?",
+      "hypothesis": "This text mentions that a family member has a fever."
     },
     {
-      "name": "States general health issues",
-      "question": "Does this text express general feelings of ill health linked to fever or infection?",
-      "hypothesis": "This text expresses general feelings of ill health linked to fever or infection."
+      "name": "Work or Activity Affected by Fever",
+      "question": "Does this text indicate that work or planned activities are affected by a fever?",
+      "hypothesis": "This text indicates that work or planned activities are affected by a fever."
     },
     {
-      "name": "Mentions missed activities due to fever",
-      "question": "Does this text mention missing activities or work due to fever or illness?",
-      "hypothesis": "This text mentions missing activities or work due to fever or illness."
+      "name": "Mention of Fever Medication",
+      "question": "Does this text mention a need for fever medication?",
+      "hypothesis": "This text mentions a need for fever medication."
     },
     {
-      "name": "Talks about fever recovery",
-      "question": "Does this text mention recovering from fever or similar symptoms?",
-      "hypothesis": "This text mentions recovering from fever or similar symptoms."
+      "name": "Reassurance About Health",
+      "question": "Does this text express reassurance about not having a fever?",
+      "hypothesis": "This text expresses reassurance about not having a fever."
     },
     {
-      "name": "Describes fever-related discomfort",
-      "question": "Does this text describe discomfort or pain specifically caused by fever?",
-      "hypothesis": "This text describes discomfort or pain specifically caused by fever."
+      "name": "Reference to Being Unaffected",
+      "question": "Does this text reference feeling unaffected by fever or illness?",
+      "hypothesis": "This text references feeling unaffected by fever or illness."
     },
     {
-      "name": "States susceptibility to fever",
-      "question": "Does this text discuss susceptibility to fever or frequent episodes of it?",
-      "hypothesis": "This text discusses susceptibility to fever or frequent episodes of it."
+      "name": "Focus on Other Health Issues",
+      "question": "Does this text focus on other health issues rather than fever-related symptoms?",
+      "hypothesis": "This text focuses on other health issues rather than fever-related symptoms."
     }
   ],
   "selected": [
     {
-      "name": "Mentions fever symptoms",
-      "coef": -0.0782081264176544
+      "name": "Symptoms Describe High Temperature",
+      "coef": -2.07158742194425
     },
     {
-      "name": "Indicates illness experience",
-      "coef": 0.22758920387031062
+      "name": "Recent Fever Confirmation",
+      "coef": 0.465106280367802
     },
     {
-      "name": "Mentions medical consultation",
-      "coef": 0.38144321752504234
+      "name": "Family Member's Fever",
+      "coef": -0.47726333851788366
     },
     {
-      "name": "Describes high fever condition",
-      "coef": -0.10134211988704768
+      "name": "Work or Activity Affected by Fever",
+      "coef": -0.8137702727738838
     },
     {
-      "name": "Reports family illness impact",
-      "coef": -0.4152010186361668
+      "name": "Mention of Fever Medication",
+      "coef": 1.440779191126416
     },
     {
-      "name": "States general health issues",
-      "coef": -0.1484221605643896
-    },
-    {
-      "name": "Mentions missed activities due to fever",
-      "coef": -0.0782769735605737
-    },
-    {
-      "name": "Talks about fever recovery",
-      "coef": 0.008729784139212264
-    },
-    {
-      "name": "Describes fever-related discomfort",
-      "coef": -0.4726442451648027
-    },
-    {
-      "name": "States susceptibility to fever",
-      "coef": 0.19696563255670474
+      "name": "Focus on Other Health Issues",
+      "coef": -0.556080228993159
     }
   ]
 }

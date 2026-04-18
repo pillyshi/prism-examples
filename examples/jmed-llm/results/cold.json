@@ -3,98 +3,96 @@
   "n_texts": 1920,
   "n_positive": 265,
   "n_negative": 1655,
+  "cv_score": 0.45092910322415697,
+  "cv_scoring": "f1",
   "features": [
     {
-      "name": "Mentions cold specifics",
-      "question": "Does this text mention specific symptoms of a cold?",
-      "hypothesis": "This text mentions specific symptoms of a cold."
+      "name": "Mentions having a cold",
+      "question": "Does this text mention having a cold explicitly?",
+      "hypothesis": "This text mentions having a cold explicitly."
     },
     {
-      "name": "States illness duration",
-      "question": "Does this text indicate the illness has lasted one day or less?",
-      "hypothesis": "This text indicates the illness has lasted one day or less."
+      "name": "Describes symptoms related to a cold",
+      "question": "Does this text describe symptoms commonly associated with a cold?",
+      "hypothesis": "This text describes symptoms commonly associated with a cold."
     },
     {
-      "name": "Discusses taking cold medicine",
-      "question": "Does this text mention taking medicine for a cold?",
-      "hypothesis": "This text mentions taking medicine for a cold."
+      "name": "Expresses fatigue due to illness",
+      "question": "Does this text express fatigue or tiredness due to an illness?",
+      "hypothesis": "This text expresses fatigue or tiredness due to an illness."
     },
     {
-      "name": "Expresses the desire to rest",
-      "question": "Does this text express a desire to rest due to feeling unwell?",
-      "hypothesis": "This text expresses a desire to rest due to feeling unwell."
+      "name": "Mentions staying home due to illness",
+      "question": "Does this text mention plans to stay home because of illness?",
+      "hypothesis": "This text mentions plans to stay home because of illness."
     },
     {
-      "name": "Indicates scheduling issues due to illness",
-      "question": "Does this text indicate that the person missed important appointments because of feeling sick?",
-      "hypothesis": "This text indicates that the person missed important appointments because of feeling sick."
+      "name": "Requests advice for cold remedies",
+      "question": "Does this text request suggestions for cold remedies?",
+      "hypothesis": "This text requests suggestions for cold remedies."
     },
     {
-      "name": "Mentions nose issues",
-      "question": "Does this text mention experiencing a runny or stuffy nose?",
-      "hypothesis": "This text mentions experiencing a runny or stuffy nose."
+      "name": "Indicates positive or active tone",
+      "question": "Does this text have a positive or active tone regarding health?",
+      "hypothesis": "This text has a positive or active tone regarding health."
     },
     {
-      "name": "Talks about lack of energy",
-      "question": "Does this text express feelings of fatigue or weakness?",
-      "hypothesis": "This text expresses feelings of fatigue or weakness."
+      "name": "Mentions unrelated health issues",
+      "question": "Does this text mention unrelated health issues or symptoms?",
+      "hypothesis": "This text mentions unrelated health issues or symptoms."
     },
     {
-      "name": "Indicates symptoms worsening",
-      "question": "Does this text indicate that symptoms have worsened?",
-      "hypothesis": "This text indicates that symptoms have worsened."
+      "name": "Focuses on physical activity",
+      "question": "Does this text focus on physical activity despite illness?",
+      "hypothesis": "This text focuses on physical activity despite illness."
     },
     {
-      "name": "Compares ailments",
-      "question": "Does this text compare cold symptoms to other illnesses?",
-      "hypothesis": "This text compares cold symptoms to other illnesses."
+      "name": "Does not specify symptoms",
+      "question": "Does this text avoid specific mentions of cold symptoms?",
+      "hypothesis": "This text avoids specific mentions of cold symptoms."
     },
     {
-      "name": "Describes plans to see a doctor",
-      "question": "Does this text discuss plans to visit a healthcare professional for cold symptoms?",
-      "hypothesis": "This text discusses plans to visit a healthcare professional for cold symptoms."
+      "name": "Advises against staying home",
+      "question": "Does this text advise against staying home due to illness?",
+      "hypothesis": "This text advises against staying home due to illness."
     }
   ],
   "selected": [
     {
-      "name": "Mentions cold specifics",
-      "coef": -0.10894636224423927
+      "name": "Mentions having a cold",
+      "coef": 1.9395533435829135
     },
     {
-      "name": "States illness duration",
-      "coef": 0.14047666598766384
+      "name": "Describes symptoms related to a cold",
+      "coef": -0.721562382732904
     },
     {
-      "name": "Discusses taking cold medicine",
-      "coef": 0.3063976613642477
+      "name": "Expresses fatigue due to illness",
+      "coef": -3.37940117732602
     },
     {
-      "name": "Expresses the desire to rest",
-      "coef": -0.09902731995001879
+      "name": "Mentions staying home due to illness",
+      "coef": 0.5964353271494379
     },
     {
-      "name": "Indicates scheduling issues due to illness",
-      "coef": 0.2145818748170687
+      "name": "Requests advice for cold remedies",
+      "coef": 1.4485372124735396
     },
     {
-      "name": "Mentions nose issues",
-      "coef": -0.0589630957885275
+      "name": "Indicates positive or active tone",
+      "coef": -87.7031084795652
     },
     {
-      "name": "Talks about lack of energy",
-      "coef": -0.23367139274529045
+      "name": "Mentions unrelated health issues",
+      "coef": -192.88878459398302
     },
     {
-      "name": "Indicates symptoms worsening",
-      "coef": 0.035645888384018734
+      "name": "Focuses on physical activity",
+      "coef": 0.12497104438362339
     },
     {
-      "name": "Compares ailments",
-      "coef": -0.5038623632442704
-    },
-    {
-      "name": "Describes plans to see a doctor",
-      "coef": 0.5581771074522552
+      "name": "Does not specify symptoms",
+      "coef": -0.6914812121110987
     }
   ]
 }
