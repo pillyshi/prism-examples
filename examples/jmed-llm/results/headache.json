@@ -1,0 +1,96 @@
+{
+  "tag": "headache",
+  "n_texts": 1920,
+  "n_positive": 251,
+  "n_negative": 1669,
+  "features": [
+    {
+      "name": "Indicates presence of headache",
+      "question": "Does this text indicate that the person or someone nearby had a headache within a day?",
+      "hypothesis": "This text indicates that the person or someone nearby had a headache within a day."
+    },
+    {
+      "name": "Mentions severe discomfort",
+      "question": "Does this text mention feeling severe discomfort due to headache?",
+      "hypothesis": "This text mentions feeling severe discomfort due to headache."
+    },
+    {
+      "name": "Seeking medical advice",
+      "question": "Does this text indicate the person is considering seeking medical advice for headache?",
+      "hypothesis": "This text indicates that the person is considering seeking medical advice for headache."
+    },
+    {
+      "name": "Discusses headache remedies",
+      "question": "Does this text mention specific remedies for relieving headache?",
+      "hypothesis": "This text mentions specific remedies for relieving headache."
+    },
+    {
+      "name": "Reflects on headache duration",
+      "question": "Does this text mention the duration of the person's headache?",
+      "hypothesis": "This text mentions the duration of the person's headache."
+    },
+    {
+      "name": "Indicates multiple symptoms",
+      "question": "Does this text mention multiple symptoms accompanying the headache?",
+      "hypothesis": "This text mentions multiple symptoms accompanying the headache."
+    },
+    {
+      "name": "Expresses frustration with headache",
+      "question": "Does this text express frustration or irritation due to headache?",
+      "hypothesis": "This text expresses frustration or irritation due to headache."
+    },
+    {
+      "name": "Mentions headache-related fatigue",
+      "question": "Does this text indicate that the headache causes fatigue?",
+      "hypothesis": "This text indicates that the headache causes fatigue."
+    },
+    {
+      "name": "Mentions negative impact on activities",
+      "question": "Does this text mention that the headache negatively impacts daily activities?",
+      "hypothesis": "This text mentions that the headache negatively impacts daily activities."
+    },
+    {
+      "name": "Discusses headache management",
+      "question": "Does this text discuss management strategies for headaches?",
+      "hypothesis": "This text discusses management strategies for headaches."
+    }
+  ],
+  "selected": [
+    {
+      "name": "Indicates presence of headache",
+      "coef": -0.16442540199813327
+    },
+    {
+      "name": "Mentions severe discomfort",
+      "coef": -0.38405610050442607
+    },
+    {
+      "name": "Seeking medical advice",
+      "coef": 0.2951113385055727
+    },
+    {
+      "name": "Reflects on headache duration",
+      "coef": 0.047903055716430214
+    },
+    {
+      "name": "Indicates multiple symptoms",
+      "coef": -0.5517140454072242
+    },
+    {
+      "name": "Expresses frustration with headache",
+      "coef": -0.35533005900786063
+    },
+    {
+      "name": "Mentions headache-related fatigue",
+      "coef": 0.36361565929737033
+    },
+    {
+      "name": "Mentions negative impact on activities",
+      "coef": 0.0717102277498986
+    },
+    {
+      "name": "Discusses headache management",
+      "coef": -0.047064717938476996
+    }
+  ]
+}

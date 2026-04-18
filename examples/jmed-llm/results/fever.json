@@ -1,0 +1,100 @@
+{
+  "tag": "fever",
+  "n_texts": 1920,
+  "n_positive": 345,
+  "n_negative": 1575,
+  "features": [
+    {
+      "name": "Mentions fever symptoms",
+      "question": "Does this text reference fever symptoms such as high temperature or chills?",
+      "hypothesis": "This text references fever symptoms such as high temperature or chills."
+    },
+    {
+      "name": "Indicates illness experience",
+      "question": "Does this text indicate a personal experience with illness such as fever, flu, or cold?",
+      "hypothesis": "This text indicates a personal experience with illness such as fever, flu, or cold."
+    },
+    {
+      "name": "Mentions medical consultation",
+      "question": "Does this text mention a visit to a doctor or medical advice regarding a fever?",
+      "hypothesis": "This text mentions a visit to a doctor or medical advice regarding a fever."
+    },
+    {
+      "name": "Describes high fever condition",
+      "question": "Does this text describe a condition related to having a high fever or prolonged fever?",
+      "hypothesis": "This text describes a condition related to having a high fever or prolonged fever."
+    },
+    {
+      "name": "Reports family illness impact",
+      "question": "Does this text discuss a family member or someone close having a fever or illness?",
+      "hypothesis": "This text discusses a family member or someone close having a fever or illness."
+    },
+    {
+      "name": "States general health issues",
+      "question": "Does this text express general feelings of ill health linked to fever or infection?",
+      "hypothesis": "This text expresses general feelings of ill health linked to fever or infection."
+    },
+    {
+      "name": "Mentions missed activities due to fever",
+      "question": "Does this text mention missing activities or work due to fever or illness?",
+      "hypothesis": "This text mentions missing activities or work due to fever or illness."
+    },
+    {
+      "name": "Talks about fever recovery",
+      "question": "Does this text mention recovering from fever or similar symptoms?",
+      "hypothesis": "This text mentions recovering from fever or similar symptoms."
+    },
+    {
+      "name": "Describes fever-related discomfort",
+      "question": "Does this text describe discomfort or pain specifically caused by fever?",
+      "hypothesis": "This text describes discomfort or pain specifically caused by fever."
+    },
+    {
+      "name": "States susceptibility to fever",
+      "question": "Does this text discuss susceptibility to fever or frequent episodes of it?",
+      "hypothesis": "This text discusses susceptibility to fever or frequent episodes of it."
+    }
+  ],
+  "selected": [
+    {
+      "name": "Mentions fever symptoms",
+      "coef": -0.0782081264176544
+    },
+    {
+      "name": "Indicates illness experience",
+      "coef": 0.22758920387031062
+    },
+    {
+      "name": "Mentions medical consultation",
+      "coef": 0.38144321752504234
+    },
+    {
+      "name": "Describes high fever condition",
+      "coef": -0.10134211988704768
+    },
+    {
+      "name": "Reports family illness impact",
+      "coef": -0.4152010186361668
+    },
+    {
+      "name": "States general health issues",
+      "coef": -0.1484221605643896
+    },
+    {
+      "name": "Mentions missed activities due to fever",
+      "coef": -0.0782769735605737
+    },
+    {
+      "name": "Talks about fever recovery",
+      "coef": 0.008729784139212264
+    },
+    {
+      "name": "Describes fever-related discomfort",
+      "coef": -0.4726442451648027
+    },
+    {
+      "name": "States susceptibility to fever",
+      "coef": 0.19696563255670474
+    }
+  ]
+}

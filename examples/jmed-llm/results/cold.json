@@ -1,0 +1,100 @@
+{
+  "tag": "cold",
+  "n_texts": 1920,
+  "n_positive": 265,
+  "n_negative": 1655,
+  "features": [
+    {
+      "name": "Mentions cold specifics",
+      "question": "Does this text mention specific symptoms of a cold?",
+      "hypothesis": "This text mentions specific symptoms of a cold."
+    },
+    {
+      "name": "States illness duration",
+      "question": "Does this text indicate the illness has lasted one day or less?",
+      "hypothesis": "This text indicates the illness has lasted one day or less."
+    },
+    {
+      "name": "Discusses taking cold medicine",
+      "question": "Does this text mention taking medicine for a cold?",
+      "hypothesis": "This text mentions taking medicine for a cold."
+    },
+    {
+      "name": "Expresses the desire to rest",
+      "question": "Does this text express a desire to rest due to feeling unwell?",
+      "hypothesis": "This text expresses a desire to rest due to feeling unwell."
+    },
+    {
+      "name": "Indicates scheduling issues due to illness",
+      "question": "Does this text indicate that the person missed important appointments because of feeling sick?",
+      "hypothesis": "This text indicates that the person missed important appointments because of feeling sick."
+    },
+    {
+      "name": "Mentions nose issues",
+      "question": "Does this text mention experiencing a runny or stuffy nose?",
+      "hypothesis": "This text mentions experiencing a runny or stuffy nose."
+    },
+    {
+      "name": "Talks about lack of energy",
+      "question": "Does this text express feelings of fatigue or weakness?",
+      "hypothesis": "This text expresses feelings of fatigue or weakness."
+    },
+    {
+      "name": "Indicates symptoms worsening",
+      "question": "Does this text indicate that symptoms have worsened?",
+      "hypothesis": "This text indicates that symptoms have worsened."
+    },
+    {
+      "name": "Compares ailments",
+      "question": "Does this text compare cold symptoms to other illnesses?",
+      "hypothesis": "This text compares cold symptoms to other illnesses."
+    },
+    {
+      "name": "Describes plans to see a doctor",
+      "question": "Does this text discuss plans to visit a healthcare professional for cold symptoms?",
+      "hypothesis": "This text discusses plans to visit a healthcare professional for cold symptoms."
+    }
+  ],
+  "selected": [
+    {
+      "name": "Mentions cold specifics",
+      "coef": -0.10894636224423927
+    },
+    {
+      "name": "States illness duration",
+      "coef": 0.14047666598766384
+    },
+    {
+      "name": "Discusses taking cold medicine",
+      "coef": 0.3063976613642477
+    },
+    {
+      "name": "Expresses the desire to rest",
+      "coef": -0.09902731995001879
+    },
+    {
+      "name": "Indicates scheduling issues due to illness",
+      "coef": 0.2145818748170687
+    },
+    {
+      "name": "Mentions nose issues",
+      "coef": -0.0589630957885275
+    },
+    {
+      "name": "Talks about lack of energy",
+      "coef": -0.23367139274529045
+    },
+    {
+      "name": "Indicates symptoms worsening",
+      "coef": 0.035645888384018734
+    },
+    {
+      "name": "Compares ailments",
+      "coef": -0.5038623632442704
+    },
+    {
+      "name": "Describes plans to see a doctor",
+      "coef": 0.5581771074522552
+    }
+  ]
+}

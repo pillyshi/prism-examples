@@ -1,0 +1,96 @@
+{
+  "tag": "influenza",
+  "n_texts": 1920,
+  "n_positive": 106,
+  "n_negative": 1814,
+  "features": [
+    {
+      "name": "Direct mention of influenza",
+      "question": "Does this text mention influenza or flu directly?",
+      "hypothesis": "This text mentions influenza or flu directly."
+    },
+    {
+      "name": "Mention of specific symptoms",
+      "question": "Does this text describe symptoms associated with influenza, such as fever or cough?",
+      "hypothesis": "This text describes symptoms associated with influenza, such as fever or cough."
+    },
+    {
+      "name": "Involvement of close contacts",
+      "question": "Does this text mention that someone nearby is experiencing influenza symptoms?",
+      "hypothesis": "This text mentions that someone nearby is experiencing influenza symptoms."
+    },
+    {
+      "name": "Recent illness declaration",
+      "question": "Does this text state that the person has recently fallen ill with influenza?",
+      "hypothesis": "This text states that the person has recently fallen ill with influenza."
+    },
+    {
+      "name": "Consequences of influenza",
+      "question": "Does this text mention consequences like staying home or missing events due to influenza?",
+      "hypothesis": "This text mentions consequences like staying home or missing events due to influenza."
+    },
+    {
+      "name": "Expressions of distress",
+      "question": "Does this text contain expressions of distress or struggle related to influenza?",
+      "hypothesis": "This text contains expressions of distress or struggle related to influenza."
+    },
+    {
+      "name": "Mention of medical verification",
+      "question": "Does this text state that a medical professional confirmed influenza?",
+      "hypothesis": "This text states that a medical professional confirmed influenza."
+    },
+    {
+      "name": "Discussion of symptoms over time",
+      "question": "Does this text detail the development of symptoms over time, specifically regarding influenza?",
+      "hypothesis": "This text details the development of symptoms over time, specifically regarding influenza."
+    },
+    {
+      "name": "Preventive measures discussed",
+      "question": "Does this text mention preventive measures taken against influenza, such as vaccinations?",
+      "hypothesis": "This text mentions preventive measures taken against influenza, such as vaccinations."
+    },
+    {
+      "name": "Social context concerning illness",
+      "question": "Does this text discuss the social impact or concerns related to influenza, like spreading it to others?",
+      "hypothesis": "This text discusses the social impact or concerns related to influenza, like spreading it to others."
+    }
+  ],
+  "selected": [
+    {
+      "name": "Direct mention of influenza",
+      "coef": -0.1949620238217589
+    },
+    {
+      "name": "Mention of specific symptoms",
+      "coef": 0.058771357560932776
+    },
+    {
+      "name": "Involvement of close contacts",
+      "coef": -0.12829211188467893
+    },
+    {
+      "name": "Consequences of influenza",
+      "coef": -0.08158631731702444
+    },
+    {
+      "name": "Expressions of distress",
+      "coef": -0.19639708665310907
+    },
+    {
+      "name": "Mention of medical verification",
+      "coef": 0.2812002187375887
+    },
+    {
+      "name": "Discussion of symptoms over time",
+      "coef": 0.13154648148586376
+    },
+    {
+      "name": "Preventive measures discussed",
+      "coef": 0.18762301729646377
+    },
+    {
+      "name": "Social context concerning illness",
+      "coef": 0.05382555716637936
+    }
+  ]
+}

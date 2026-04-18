@@ -1,0 +1,92 @@
+{
+  "tag": "cough",
+  "n_texts": 1920,
+  "n_positive": 227,
+  "n_negative": 1693,
+  "features": [
+    {
+      "name": "Mentions symptoms explicitly",
+      "question": "Does this text detail symptoms like fever or cough?",
+      "hypothesis": "This text details symptoms like fever or cough."
+    },
+    {
+      "name": "Expresses physical discomfort",
+      "question": "Does this text express discomfort or pain related to cough or throat?",
+      "hypothesis": "This text expresses discomfort or pain related to cough or throat."
+    },
+    {
+      "name": "References medication usage",
+      "question": "Does this text mention taking medication for cough or related symptoms?",
+      "hypothesis": "This text mentions taking medication for cough or related symptoms."
+    },
+    {
+      "name": "Discusses experiencing cough",
+      "question": "Does this text indicate experiencing a cough or throat issue recently?",
+      "hypothesis": "This text indicates experiencing a cough or throat issue recently."
+    },
+    {
+      "name": "Mentions flu symptoms",
+      "question": "Does this text mention flu-like symptoms such as fever or weakness?",
+      "hypothesis": "This text mentions flu-like symptoms such as fever or weakness."
+    },
+    {
+      "name": "Expresses concern about health",
+      "question": "Does this text show concern about worsening health or symptoms?",
+      "hypothesis": "This text shows concern about worsening health or symptoms."
+    },
+    {
+      "name": "Indicates mask use in public",
+      "question": "Does this text suggest using a mask due to coughing or sickness in public?",
+      "hypothesis": "This text suggests using a mask due to coughing or sickness in public."
+    },
+    {
+      "name": "Mentions impact on daily life",
+      "question": "Does this text mention how symptoms are affecting daily activities or responsibilities?",
+      "hypothesis": "This text mentions how symptoms are affecting daily activities or responsibilities."
+    },
+    {
+      "name": "Describes preventative actions",
+      "question": "Does this text talk about taking actions to prevent cough or illness?",
+      "hypothesis": "This text talks about taking actions to prevent cough or illness."
+    },
+    {
+      "name": "Relates personal experiences with cough",
+      "question": "Does this text include personal anecdotes related to cough or throat issues?",
+      "hypothesis": "This text includes personal anecdotes related to cough or throat issues."
+    }
+  ],
+  "selected": [
+    {
+      "name": "Mentions symptoms explicitly",
+      "coef": 0.12544962267707774
+    },
+    {
+      "name": "Expresses physical discomfort",
+      "coef": 0.241641785846419
+    },
+    {
+      "name": "Mentions flu symptoms",
+      "coef": 0.08889093548581846
+    },
+    {
+      "name": "Expresses concern about health",
+      "coef": 0.08387968888830433
+    },
+    {
+      "name": "Indicates mask use in public",
+      "coef": -0.09548008351377217
+    },
+    {
+      "name": "Mentions impact on daily life",
+      "coef": 0.004471756706900424
+    },
+    {
+      "name": "Describes preventative actions",
+      "coef": -0.008484074541401224
+    },
+    {
+      "name": "Relates personal experiences with cough",
+      "coef": -0.050908985749211474
+    }
+  ]
+}

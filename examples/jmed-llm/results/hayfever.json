@@ -1,0 +1,96 @@
+{
+  "tag": "hayfever",
+  "n_texts": 1920,
+  "n_positive": 163,
+  "n_negative": 1757,
+  "features": [
+    {
+      "name": "Mentions specific symptoms of hay fever",
+      "question": "Does this text mention specific symptoms related to hay fever?",
+      "hypothesis": "This text mentions specific symptoms related to hay fever."
+    },
+    {
+      "name": "Indicates recent diagnosis of hay fever",
+      "question": "Does this text indicate that the person was recently diagnosed with hay fever?",
+      "hypothesis": "This text indicates that the person was recently diagnosed with hay fever."
+    },
+    {
+      "name": "Expresses frustration from hay fever",
+      "question": "Does this text express frustration related to hay fever symptoms?",
+      "hypothesis": "This text expresses frustration related to hay fever symptoms."
+    },
+    {
+      "name": "Mentions medication for hay fever",
+      "question": "Does this text mention taking medication specifically for hay fever?",
+      "hypothesis": "This text mentions taking medication specifically for hay fever."
+    },
+    {
+      "name": "Talks about hay fever season",
+      "question": "Does this text reference the season associated with hay fever?",
+      "hypothesis": "This text references the season associated with hay fever."
+    },
+    {
+      "name": "Mentions a different illness instead",
+      "question": "Does this text mention symptoms related to a different illness instead of hay fever?",
+      "hypothesis": "This text mentions symptoms related to a different illness instead of hay fever."
+    },
+    {
+      "name": "Describes ongoing flu or cold symptoms",
+      "question": "Does this text describe ongoing symptoms related to a flu or cold?",
+      "hypothesis": "This text describes ongoing symptoms related to a flu or cold."
+    },
+    {
+      "name": "Expresses relief from non-hay fever symptoms",
+      "question": "Does this text express relief from symptoms not related to hay fever?",
+      "hypothesis": "This text expresses relief from symptoms not related to hay fever."
+    },
+    {
+      "name": "Indicates no awareness of hay fever symptoms",
+      "question": "Does this text indicate the person is not aware of what hay fever symptoms are?",
+      "hypothesis": "This text indicates the person is not aware of what hay fever symptoms are."
+    },
+    {
+      "name": "Suggests preventive measures for other illnesses",
+      "question": "Does this text suggest preventive measures for illnesses other than hay fever?",
+      "hypothesis": "This text suggests preventive measures for illnesses other than hay fever."
+    }
+  ],
+  "selected": [
+    {
+      "name": "Mentions specific symptoms of hay fever",
+      "coef": -0.1894365991493738
+    },
+    {
+      "name": "Indicates recent diagnosis of hay fever",
+      "coef": -0.173811586479432
+    },
+    {
+      "name": "Mentions medication for hay fever",
+      "coef": -0.002675356769521484
+    },
+    {
+      "name": "Talks about hay fever season",
+      "coef": 0.03644317407819271
+    },
+    {
+      "name": "Mentions a different illness instead",
+      "coef": -0.019566660091673082
+    },
+    {
+      "name": "Describes ongoing flu or cold symptoms",
+      "coef": -0.14125489770291133
+    },
+    {
+      "name": "Expresses relief from non-hay fever symptoms",
+      "coef": 0.019571056059946055
+    },
+    {
+      "name": "Indicates no awareness of hay fever symptoms",
+      "coef": -0.14481882750853298
+    },
+    {
+      "name": "Suggests preventive measures for other illnesses",
+      "coef": 0.27601021728500424
+    }
+  ]
+}

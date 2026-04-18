@@ -1,0 +1,17 @@
+[project]
+name = "jmed-llm-example"
+version = "0.1.0"
+description = "Data analysis example using jmed-llm dataset with Prism"
+authors = [
+    {name = "pillyshi"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "prism-text @ git+https://github.com/pillyshi/prism"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

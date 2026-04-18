@@ -1,0 +1,88 @@
+{
+  "tag": "runnynose",
+  "n_texts": 1920,
+  "n_positive": 375,
+  "n_negative": 1545,
+  "features": [
+    {
+      "name": "Mentions runny nose or congestion",
+      "question": "Does this text mention 'runny nose' or 'nasal congestion' explicitly?",
+      "hypothesis": "This text mentions 'runny nose' or 'nasal congestion' explicitly."
+    },
+    {
+      "name": "Describes daily suffering",
+      "question": "Does this text describe suffering from symptoms on the same day as posting?",
+      "hypothesis": "This text describes suffering from symptoms on the same day as posting."
+    },
+    {
+      "name": "Frequent mentions of symptoms",
+      "question": "Does this text frequently mention symptoms such as runny nose or congestion?",
+      "hypothesis": "This text frequently mentions symptoms such as runny nose or congestion."
+    },
+    {
+      "name": "Indicates need for rest",
+      "question": "Does this text indicate the need for rest due to symptoms?",
+      "hypothesis": "This text indicates the need for rest due to symptoms."
+    },
+    {
+      "name": "Direct mentions of medication",
+      "question": "Does this text mention medication taken for symptoms?",
+      "hypothesis": "This text mentions medication taken for symptoms."
+    },
+    {
+      "name": "States specific illness diagnosis",
+      "question": "Does this text state a specific diagnosis like flu or allergy?",
+      "hypothesis": "This text states a specific diagnosis like flu or allergy."
+    },
+    {
+      "name": "Expresses concern for others' health",
+      "question": "Does this text show concern for someone else's health condition?",
+      "hypothesis": "This text shows concern for someone else's health condition."
+    },
+    {
+      "name": "Asks for remedies or advice",
+      "question": "Does this text ask for advice or remedies to alleviate symptoms?",
+      "hypothesis": "This text asks for advice or remedies to alleviate symptoms."
+    },
+    {
+      "name": "Describes prior experience with symptoms",
+      "question": "Does this text mention previous experiences with similar symptoms?",
+      "hypothesis": "This text mentions previous experiences with similar symptoms."
+    },
+    {
+      "name": "Mentions discomfort related to social situations",
+      "question": "Does this text mention discomfort or trouble related to social interactions due to symptoms?",
+      "hypothesis": "This text mentions discomfort or trouble related to social interactions due to symptoms."
+    }
+  ],
+  "selected": [
+    {
+      "name": "Describes daily suffering",
+      "coef": 0.06255332609860835
+    },
+    {
+      "name": "Frequent mentions of symptoms",
+      "coef": 0.26293449680777986
+    },
+    {
+      "name": "Direct mentions of medication",
+      "coef": 0.04616595197464244
+    },
+    {
+      "name": "Expresses concern for others' health",
+      "coef": -0.11596350098256145
+    },
+    {
+      "name": "Asks for remedies or advice",
+      "coef": -0.2956639650681601
+    },
+    {
+      "name": "Describes prior experience with symptoms",
+      "coef": -0.29279662105417376
+    },
+    {
+      "name": "Mentions discomfort related to social situations",
+      "coef": 0.03171349286549236
+    }
+  ]
+}

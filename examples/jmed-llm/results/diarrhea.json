@@ -1,0 +1,100 @@
+{
+  "tag": "diarrhea",
+  "n_texts": 1920,
+  "n_positive": 182,
+  "n_negative": 1738,
+  "features": [
+    {
+      "name": "Mentions diarrhea directly",
+      "question": "Does this text mention diarrhea directly?",
+      "hypothesis": "This text mentions diarrhea directly."
+    },
+    {
+      "name": "Describes physical discomfort",
+      "question": "Does this text describe physical discomfort related to diarrhea?",
+      "hypothesis": "This text describes physical discomfort related to diarrhea."
+    },
+    {
+      "name": "Timeframe of symptoms",
+      "question": "Does this text indicate symptoms occurred within the last day?",
+      "hypothesis": "This text indicates symptoms occurred within the last day."
+    },
+    {
+      "name": "Work-related illness mention",
+      "question": "Does this text mention needing to take time off work due to illness?",
+      "hypothesis": "This text mentions needing to take time off work due to illness."
+    },
+    {
+      "name": "Mentions specific food triggers",
+      "question": "Does this text mention specific food that triggered diarrhea?",
+      "hypothesis": "This text mentions specific food that triggered diarrhea."
+    },
+    {
+      "name": "Describes milder symptoms",
+      "question": "Does this text describe milder symptoms without mentioning diarrhea?",
+      "hypothesis": "This text describes milder symptoms without mentioning diarrhea."
+    },
+    {
+      "name": "General health concerns",
+      "question": "Does this text express general health concerns without specific mention of diarrhea?",
+      "hypothesis": "This text expresses general health concerns without specific mention of diarrhea."
+    },
+    {
+      "name": "Focus on different diagnoses",
+      "question": "Does this text focus on other diagnoses like flu or cold instead of diarrhea?",
+      "hypothesis": "This text focuses on other diagnoses like flu or cold instead of diarrhea."
+    },
+    {
+      "name": "Mentions non-diarrhea related symptoms",
+      "question": "Does this text describe symptoms like headaches or fatigue without mentioning diarrhea?",
+      "hypothesis": "This text describes symptoms like headaches or fatigue without mentioning diarrhea."
+    },
+    {
+      "name": "Describes social situations",
+      "question": "Does this text describe social situations without mentioning diarrhea?",
+      "hypothesis": "This text describes social situations without mentioning diarrhea."
+    }
+  ],
+  "selected": [
+    {
+      "name": "Mentions diarrhea directly",
+      "coef": 0.6697008282444272
+    },
+    {
+      "name": "Describes physical discomfort",
+      "coef": -0.0891241166083881
+    },
+    {
+      "name": "Timeframe of symptoms",
+      "coef": -0.10013687517472718
+    },
+    {
+      "name": "Work-related illness mention",
+      "coef": -0.08698115020098439
+    },
+    {
+      "name": "Mentions specific food triggers",
+      "coef": 0.18676178643581182
+    },
+    {
+      "name": "Describes milder symptoms",
+      "coef": 0.09315399839237215
+    },
+    {
+      "name": "General health concerns",
+      "coef": 0.07140185675433448
+    },
+    {
+      "name": "Focus on different diagnoses",
+      "coef": -0.0365485455679708
+    },
+    {
+      "name": "Mentions non-diarrhea related symptoms",
+      "coef": -0.4967862232700763
+    },
+    {
+      "name": "Describes social situations",
+      "coef": -0.1524198332184401
+    }
+  ]
+}
