@@ -51,7 +51,7 @@ def load_texts(path: str) -> list[str]:
     return texts
 
 
-def run(prism: Prism, texts: list[str], n_axes: int) -> dict:
+def run(prism: Prism, texts: list[str], n_axes: int, n_features: int) -> dict:
     print(f"Discovering {n_axes} axes ...")
     axes = prism.discover_axes(texts, n=n_axes, language="Japanese")
     print(f"Discovered {len(axes)} axes:")
@@ -62,7 +62,7 @@ def run(prism: Prism, texts: list[str], n_axes: int) -> dict:
     axes_labels = prism.label_axes(texts, axes)
 
     print("Generating features ...")
-    features_by_axis = prism.generate_features(texts, axes, axes_labels=axes_labels, language="Japanese")
+    features_by_axis = prism.generate_features(texts, axes, n_features=n_features, axes_labels=axes_labels, language="Japanese")
 
     print("Scoring with NLI ...")
     matrices = prism.score(texts, features_by_axis, axes_labels=axes_labels)
@@ -92,6 +92,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="SMDIS axis discovery and feature analysis with Prism")
     parser.add_argument("--all", action="store_true", help="Use full dataset (datasets/all/SMDIS.csv)")
     parser.add_argument("--n-axes", type=int, default=10, help="Number of axes to discover")
+    parser.add_argument("--n-features", type=int, default=10, help="Number of features per axis")
     args = parser.parse_args()
 
     if args.all:
@@ -110,11 +111,12 @@ def main() -> None:
         mode="classification",
     )
 
-    RESULTS_DIR.mkdir(exist_ok=True)
+    out_dir = RESULTS_DIR / ("all" if args.all else "small")
+    out_dir.mkdir(parents=True, exist_ok=True)
 
-    output = run(prism, texts, args.n_axes)
+    output = run(prism, texts, args.n_axes, args.n_features)
 
-    out_path = RESULTS_DIR / "discover.json"
+    out_path = out_dir / "discover.json"
     out_path.write_text(json.dumps(output, ensure_ascii=False, indent=2))
 
     print(f"\n=== Results ===")
