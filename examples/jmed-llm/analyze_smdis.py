@@ -110,7 +110,6 @@ def main() -> None:
     prism = Prism(
         llm=os.environ.get("PRISM_LLM", "gpt-4o-mini"),
         nli_model="MoritzLaurer/mDeBERTa-v3-base-mnli-xnli",
-        mode="classification",
     )
 
     out_dir = RESULTS_DIR / ("all" if args.all else "small")
