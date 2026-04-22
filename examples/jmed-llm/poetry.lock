@@ -1160,7 +1160,7 @@ files = [
 
 [[package]]
 name = "prism-text"
-version = "0.3.1"
+version = "0.4.0"
 description = "Language-Defined Feature Space for Interpretable Text Analysis"
 optional = false
 python-versions = ">=3.11"
@@ -1179,7 +1179,7 @@ tiktoken = ">=0.7"
 type = "git"
 url = "https://github.com/pillyshi/prism"
 reference = "HEAD"
-resolved_reference = "25c8dbfeffc9057d9479b29c4d069eef81f5934c"
+resolved_reference = "4db52ab16451847f40eda9f5cab1788e5c7a6d8a"
 
 [[package]]
 name = "protobuf"

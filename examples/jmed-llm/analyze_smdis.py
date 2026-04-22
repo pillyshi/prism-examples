@@ -56,7 +56,7 @@ def run(prism: Prism, texts: list[str], n_axes: int, n_features: int) -> dict:
     axes = prism.discover_axes(texts, n=n_axes, language="Japanese")
     print(f"Discovered {len(axes)} axes:")
     for ax in axes:
-        print(f"  - {ax.name}")
+        print(f"  - {ax.hypothesis}")
 
     print("Labeling texts per axis (NLI) ...")
     axes_labels = prism.label_axes(texts, axes)
@@ -70,18 +70,20 @@ def run(prism: Prism, texts: list[str], n_axes: int, n_features: int) -> dict:
     print("Selecting features ...")
     results, _ = prism.select(matrices)
 
+    selected_by_axis = {axis: result.selected_features for axis, result in results.items()}
+    named_by_axis = prism.name_features(selected_by_axis, language="Japanese")
+
     output_axes = []
     for axis in axes:
         result = results[axis]
+        named_features = named_by_axis[axis]
         output_axes.append({
-            "name": axis.name,
-            "question": axis.question,
             "hypothesis": axis.hypothesis,
             "cv_score": result.cv_score,
             "cv_scoring": result.cv_scoring,
             "selected_features": [
-                {"name": f.name, "coef": c}
-                for f, c in zip(result.selected_features, result.coef)
+                {"name": nf.name, "hypothesis": nf.feature.hypothesis, "coef": c}
+                for nf, c in zip(named_features, result.coef)
             ],
         })
 
@@ -121,7 +123,7 @@ def main() -> None:
 
     print(f"\n=== Results ===")
     for ax in output["axes"]:
-        print(f"[{ax['name']}] cv={ax['cv_score']:.3f}")
+        print(f"[{ax['hypothesis']}] cv={ax['cv_score']:.3f}")
         for f in ax["selected_features"]:
             print(f"  [{f['coef']:+.3f}] {f['name']}")
     print(f"\nSaved to {out_path}")
