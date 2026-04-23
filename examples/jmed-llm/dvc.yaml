@@ -1,0 +1,53 @@
+vars:
+  - params.yaml
+
+stages:
+  download:
+    cmd: poetry run python download.py
+    outs:
+    - datasets/SMDIS.csv
+    - datasets/SMDIS_SMALL.csv
+  run_smdis:
+    cmd: poetry run papermill
+      -p root_dir . -p dataset_name all
+      -p llm ${llm} -p nli_model ${nli_model}
+      -p seed ${seed} -p n_axes ${n_axes}
+      -p n_features ${n_features} -p n_augmented_texts ${n_augmented_texts}
+      notebook/smdis.ipynb notebook/smdis_output.ipynb
+    deps:
+    - datasets/SMDIS.csv
+    params:
+    - llm
+    - nli_model
+    - seed
+    - n_axes
+    - n_features
+    - n_augmented_texts
+    outs:
+    - notebook/smdis_output.ipynb
+    - artifacts/run_smdis/all/session
+    - artifacts/run_smdis/all/augmented.json
+    metrics:
+    - metrics/run_smdis/all/metrics.json
+  run_smdis_small:
+    cmd: poetry run papermill
+      -p root_dir . -p dataset_name small
+      -p llm ${llm} -p nli_model ${nli_model}
+      -p seed ${seed} -p n_axes ${n_axes}
+      -p n_features ${n_features} -p n_augmented_texts ${n_augmented_texts}
+      notebook/smdis.ipynb notebook/smdis_output_small.ipynb
+    deps:
+    - datasets/SMDIS_SMALL.csv
+    params:
+    - llm
+    - nli_model
+    - seed
+    - n_axes
+    - n_features
+    - n_augmented_texts
+    outs:
+    - notebook/smdis_output_small.ipynb
+    - artifacts/run_smdis/small/session
+    - artifacts/run_smdis/small/augmented.json
+    metrics:
+    - metrics/run_smdis/small/metrics.json

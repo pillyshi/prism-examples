@@ -1,0 +1,6 @@
+llm: gpt-4o-mini
+nli_model: akiFQC/bert-base-japanese-v3_nli-jsnli-jnli-jsick
+seed: 1
+n_axes: 1
+n_features: 3
+n_augmented_texts: 2
