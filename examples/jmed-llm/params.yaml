@@ -1,6 +1,12 @@
-llm: gpt-4o-mini
-nli_model: akiFQC/bert-base-japanese-v3_nli-jsnli-jnli-jsick
-seed: 1
-n_axes: 1
-n_features: 3
-n_augmented_texts: 2
+"embedding_model": "paraphrase-multilingual-MiniLM-L12-v2"
+"folds":
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+"llm": "gpt-4o-mini"
+"n_features": 128
+"nli_model": "akiFQC/bert-base-japanese-v3_nli-jsnli-jnli-jsick"
+"sample_method": "random"
+"seed": 1

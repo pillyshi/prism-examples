@@ -1,0 +1,60 @@
+schema: '2.0'
+stages:
+  smdis_small_download:
+    cmd: poetry run python pipelines/smdis_small/download.py
+    deps:
+    - path: pipelines/smdis_small/download.py
+      hash: md5
+      md5: 365cc44734e450ea5dcffceec770c241
+      size: 290
+    outs:
+    - path: datasets/smdis.csv
+      hash: md5
+      md5: b833e3c1ba0480ea63dcdb4237ce4a35
+      size: 23992
+  smdis_small_preprocess:
+    cmd: poetry run python pipelines/smdis_small/preprocess.py
+    deps:
+    - path: datasets/smdis.csv
+      hash: md5
+      md5: b833e3c1ba0480ea63dcdb4237ce4a35
+      size: 23992
+    - path: pipelines/smdis_small/preprocess.py
+      hash: md5
+      md5: 6a26881fd8db05d568a471ce03a8a520
+      size: 711
+    outs:
+    - path: artifacts/smdis_small/preprocess/rows.json
+      hash: md5
+      md5: 3e9468a9d896055be9c271544e501562
+      size: 8643
+  smdis_small_split_folds:
+    cmd: poetry run python pipelines/smdis_small/split_folds.py
+    deps:
+    - path: artifacts/smdis_small/preprocess/rows.json
+      hash: md5
+      md5: 3e9468a9d896055be9c271544e501562
+      size: 8643
+    - path: pipelines/smdis_small/split_folds.py
+      hash: md5
+      md5: 41a8e6a444037630e991ddd3a81c1b08
+      size: 1405
+    params:
+      params.yaml:
+        folds:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        seed: 1
+    outs:
+    - path: artifacts/smdis_small/split_folds/folds
+      hash: md5
+      md5: 883050ca7803bc00ba19d4583d6fe35f.dir
+      size: 17014
+      nfiles: 10
+    - path: artifacts/smdis_small/split_folds/mlb.joblib
+      hash: md5
+      md5: d3c486e368dd0823d801ab605fc0a5c5
+      size: 1073

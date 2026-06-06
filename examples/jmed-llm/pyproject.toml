@@ -1,23 +1,30 @@
 [project]
-name = "jmed-llm-example"
+name = "jmed-llm-examples"
 version = "0.1.0"
-description = "Data analysis example using jmed-llm dataset with Prism"
+description = "Data analysis example using jmed-llm dataset with Semaxis"
 authors = [
     {name = "pillyshi"}
 ]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "prism-text @ git+https://github.com/pillyshi/prism",
     "protobuf (>=7.34.1,<8.0.0)",
     "fugashi (>=1.5.2,<2.0.0)",
     "unidic-lite (>=1.0.8,<2.0.0)",
     "papermill (>=2.7.0,<3.0.0)",
     "notebook (>=7.5.5,<8.0.0)",
     "ipywidgets (>=8.1.8,<9.0.0)",
-    "dvc (>=3.67.1,<4.0.0)"
+    "dvc (>=3.67.1,<4.0.0)",
+    "imbalanced-learn (>=0.14.1,<0.15.0)",
+    "semaxis (>=0.20.0,<0.21.0)",
+    "dvcgen (==0.5.0)",
+    "iterative-stratification (>=0.1.9,<0.2.0)"
 ]
 
+[tool.poetry]
+packages = [
+    { include = "jmed_llm_examples", from = "src" }
+]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

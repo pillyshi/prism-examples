@@ -23,8 +23,3 @@ def download_if_missing(local_path: str, gh_path: str) -> None:
     data = base64.b64decode(content_b64)
     Path(local_path).write_bytes(data)
     print(f"Saved to {local_path}")
-
-
-if __name__ == "__main__":
-    download_if_missing("datasets/SMDIS_SMALL.csv", "datasets/smdis.csv")
-    download_if_missing("datasets/SMDIS.csv", "datasets/all/SMDIS.csv")

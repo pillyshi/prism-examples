@@ -1,0 +1,30 @@
+import json
+import csv
+from pathlib import Path
+
+from dvcgen import dep, out, stage
+
+
+stage(
+    name="smdis_small_preprocess"
+)
+
+PATH_DATASET = dep("datasets/smdis.csv")
+PATH_ROWS = out("artifacts/smdis_small/preprocess/rows.json")
+
+
+text2tags = {}
+with open(PATH_DATASET) as f:
+    for row in csv.DictReader(f):
+        if row["answer"] != "A":
+            continue
+        post = row["question"].split("「")[1].split("」")[0]
+        tags = text2tags.setdefault(post, list())
+        tags.append(row["tag"])
+
+Path(PATH_ROWS).parent.mkdir(parents=True, exist_ok=True)
+with open(PATH_ROWS, "w") as f:
+    json.dump([{
+        "text": text,
+        "tags": tags
+    } for text, tags in text2tags.items()], f)
