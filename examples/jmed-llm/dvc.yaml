@@ -25,7 +25,7 @@
       - "seed"
   "smdis_small_transform":
     "do":
-      "cmd": "poetry run python pipelines/smdis_small/transform.py"
+      "cmd": "poetry run python pipelines/smdis_small/transform.py --fold ${item}"
       "deps":
         - "pipelines/smdis_small/transform.py"
         - "artifacts/smdis_small/split_folds/folds/fold_${item}/train.npz"
