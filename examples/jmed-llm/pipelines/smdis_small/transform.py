@@ -38,7 +38,7 @@ with mlflow.start_run():
     # n_ctx=2^12, n_features=2^5 -> OK
     # n_ctx=2^12, n_features=2^6 -> OK? ダメな時もある
     tokens_per_hypothesis = mlflow.log_param("tokens_per_hypothesis", 50)  # 50 ~ 150
-    n_features = mlflow.log_param("n_features", 2 ** 3)
+    n_features = mlflow.log_param("n_features", 2 ** 5)
     output_budget = n_features * tokens_per_hypothesis
     n_ctx = mlflow.log_param("n_ctx", 2 ** 12)
     if n_ctx - output_budget < 0:
