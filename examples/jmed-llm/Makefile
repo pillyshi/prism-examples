@@ -10,7 +10,7 @@ define remote-exec
 ssh $(HOST) "bash -l -c 'cd $(REMOTE_DIR) && $(1)'"
 endef
 
-.PHONY: sync ssh install install-llama-cpp setup run serve-vllm serve-ollama guard-%
+.PHONY: sync ssh install install-llama-cpp setup run serve-vllm serve-ollama readme guard-%
 
 guard-%:
 	$(if $(value $*),,$(error $* is not set. Define it in .env or pass $*=...))
@@ -20,6 +20,9 @@ sync: guard-HOST
 
 fetch: 
 	rsync -avz $(HOST):$(REMOTE_DIR)/mlflow.db $(HOST):$(REMOTE_DIR)/mlruns  ./
+
+readme:
+	QUARTO_PYTHON=.venv/bin/python quarto render pipelines/smdis_small/readme.qmd
 
 ssh: guard-HOST
 	ssh $(HOST)

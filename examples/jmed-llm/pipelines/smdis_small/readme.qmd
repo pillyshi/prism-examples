@@ -1,0 +1,320 @@
+---
+title: "smdis_small"
+format:
+  gfm:
+    output-file: readme.md
+execute:
+  echo: false
+  warning: false
+  message: false
+jupyter: python3
+---
+
+```{python}
+from pathlib import Path
+import sqlite3
+
+from IPython.display import Markdown, display
+import pandas as pd
+
+
+ROOTS = [Path.cwd(), *Path.cwd().parents]
+MLFLOW_DB = next((path / "mlflow.db" for path in ROOTS if (path / "mlflow.db").exists()), None)
+EXPECTED_FOLDS = set(range(5))
+
+query = """
+select
+  r.run_uuid,
+  r.start_time,
+  r.end_time,
+  max(case when t.key = 'mlflow.source.name' then t.value end) as source_name,
+  max(case when p.key = 'fold' then cast(p.value as integer) end) as fold,
+  max(case when p.key = 'repo_id' then p.value end) as repo_id,
+  max(case when p.key = 'filename' then p.value end) as filename,
+  max(case when p.key = 'n_features' then cast(p.value as integer) end) as n_features,
+  max(case when p.key = 'n_ctx' then cast(p.value as integer) end) as n_ctx,
+  max(case when p.key = 'tokens_per_hypothesis' then cast(p.value as integer) end) as tokens_per_hypothesis,
+  max(case when p.key = 'nli_model' then p.value end) as nli_model,
+  max(case when p.key = 'embedding_model' then p.value end) as embedding_model,
+  max(case when p.key = 'n_splits' then cast(p.value as integer) end) as n_splits,
+  max(case when p.key = 'seed' then cast(p.value as integer) end) as seed,
+  max(case when lm.key = 'f1_micro' then cast(lm.value as real) end) as f1_micro
+from runs r
+left join params p on r.run_uuid = p.run_uuid
+left join tags t on r.run_uuid = t.run_uuid
+left join latest_metrics lm on r.run_uuid = lm.run_uuid
+where r.lifecycle_stage = 'active'
+  and r.status = 'FINISHED'
+group by r.run_uuid, r.start_time, r.end_time
+having fold between 0 and 4
+order by r.start_time
+"""
+
+if MLFLOW_DB is not None:
+    with sqlite3.connect(MLFLOW_DB) as con:
+        runs = pd.read_sql_query(query, con)
+else:
+    runs = pd.DataFrame()
+
+if runs.empty:
+    results = pd.DataFrame(
+        columns=[
+            "fold",
+            "f1_micro",
+            "local_llm",
+            "n_features",
+            "n_ctx",
+            "train_run",
+            "transform_run",
+            "evaluate_run",
+            "evaluated_at",
+        ]
+    )
+else:
+    eval_runs = runs[
+        (runs["source_name"] == "pipelines/smdis_small/evaluate.py")
+        & runs["f1_micro"].notna()
+    ].sort_values("start_time")
+    rows = []
+    for _, eval_run in eval_runs.iterrows():
+        fold = int(eval_run["fold"])
+        train_candidates = runs[
+            (runs["source_name"] == "pipelines/smdis_small/train.py")
+            & (runs["fold"] == fold)
+            & (runs["end_time"] <= eval_run["start_time"])
+        ].sort_values("end_time")
+        train_run = train_candidates.iloc[-1] if not train_candidates.empty else None
+
+        if train_run is not None:
+            transform_cutoff = train_run["start_time"]
+        else:
+            transform_cutoff = eval_run["start_time"]
+        transform_candidates = runs[
+            (runs["source_name"] == "pipelines/smdis_small/transform.py")
+            & (runs["fold"] == fold)
+            & (runs["end_time"] <= transform_cutoff)
+        ].sort_values("end_time")
+        transform_run = transform_candidates.iloc[-1] if not transform_candidates.empty else None
+
+        rows.append(
+            {
+                "fold": fold,
+                "f1_micro": eval_run["f1_micro"],
+                "repo_id": None if transform_run is None else transform_run["repo_id"],
+                "filename": None if transform_run is None else transform_run["filename"],
+                "n_features": None if transform_run is None else transform_run["n_features"],
+                "n_ctx": None if transform_run is None else transform_run["n_ctx"],
+                "tokens_per_hypothesis": None
+                if transform_run is None
+                else transform_run["tokens_per_hypothesis"],
+                "nli_model": None if transform_run is None else transform_run["nli_model"],
+                "embedding_model": None
+                if transform_run is None
+                else transform_run["embedding_model"],
+                "n_splits": None if train_run is None else train_run["n_splits"],
+                "seed": None if train_run is None else train_run["seed"],
+                "train_run": None if train_run is None else train_run["run_uuid"],
+                "transform_run": None if transform_run is None else transform_run["run_uuid"],
+                "evaluate_run": eval_run["run_uuid"],
+                "evaluated_at": pd.to_datetime(eval_run["start_time"], unit="ms").strftime(
+                    "%Y-%m-%d %H:%M:%S"
+                ),
+            }
+        )
+
+    results = pd.DataFrame(rows)
+
+if not results.empty:
+    group_columns = [
+        "repo_id",
+        "filename",
+        "n_features",
+        "n_ctx",
+        "tokens_per_hypothesis",
+        "nli_model",
+        "embedding_model",
+        "n_splits",
+        "seed",
+    ]
+    results["param_signature"] = (
+        results[group_columns].astype("string").fillna("").agg("||".join, axis=1)
+    )
+    results = results.sort_values(["param_signature", "evaluated_at", "fold"]).copy()
+
+    experiment_keys = []
+    for _, group in results.groupby("param_signature", sort=False):
+        batch = 0
+        seen_folds = set()
+        for index, row in group.iterrows():
+            fold = int(row["fold"])
+            if fold in seen_folds or seen_folds == EXPECTED_FOLDS:
+                batch += 1
+                seen_folds = set()
+            seen_folds.add(fold)
+            experiment_keys.append((index, f"{row['param_signature']}||batch={batch}"))
+
+    experiment_key_map = dict(experiment_keys)
+    results["experiment_key"] = results.index.map(experiment_key_map)
+    complete_experiment_ids = (
+        results.groupby("experiment_key")["fold"]
+        .apply(lambda values: set(values.astype(int)) == EXPECTED_FOLDS)
+    )
+    complete_experiment_ids = complete_experiment_ids[complete_experiment_ids].index
+    results = results[results["experiment_key"].isin(complete_experiment_ids)].copy()
+    experiment_order = (
+        results.groupby("experiment_key")["evaluated_at"]
+        .min()
+        .sort_values()
+        .reset_index()
+    )
+    experiment_order["experiment_id"] = range(1, len(experiment_order) + 1)
+    results = results.merge(
+        experiment_order[["experiment_key", "experiment_id"]],
+        on="experiment_key",
+        how="left",
+    )
+    results["experiment_started_at"] = results.groupby("experiment_id")["evaluated_at"].transform("min")
+    results = results.sort_values(["experiment_started_at", "fold"])
+
+observed_folds = set(results["fold"].astype(int).tolist())
+missing_folds = sorted(EXPECTED_FOLDS - observed_folds)
+
+summary = pd.DataFrame(
+    columns=[
+        "experiment_id",
+        "f1_micro_mean",
+        "f1_micro_std",
+        "f1_micro_min",
+        "f1_micro_max",
+    ]
+)
+if not results.empty:
+    summary = (
+        results.groupby("experiment_id")["f1_micro"]
+        .agg(
+            f1_micro_mean="mean",
+            f1_micro_std="std",
+            f1_micro_min="min",
+            f1_micro_max="max",
+        )
+        .reset_index()
+    )
+
+experiment_params = pd.DataFrame()
+if not results.empty:
+    param_columns = [
+        "experiment_id",
+        "repo_id",
+        "filename",
+        "n_features",
+        "n_ctx",
+        "tokens_per_hypothesis",
+        "nli_model",
+        "embedding_model",
+        "n_splits",
+        "seed",
+    ]
+    experiment_params = (
+        results[param_columns]
+        .drop_duplicates()
+        .sort_values("experiment_id")
+        .reset_index(drop=True)
+    )
+    for column in ["n_features", "n_ctx", "tokens_per_hypothesis", "n_splits", "seed"]:
+        experiment_params[column] = experiment_params[column].map(
+            lambda x: "" if pd.isna(x) else str(int(x))
+        )
+
+display_summary = summary.merge(experiment_params, on="experiment_id", how="left")
+display_summary = display_summary[
+    [
+        "experiment_id",
+        "f1_micro_mean",
+        "f1_micro_std",
+        "f1_micro_min",
+        "f1_micro_max",
+        "repo_id",
+        "filename",
+        "n_features",
+        "n_ctx",
+        "tokens_per_hypothesis",
+        "nli_model",
+        "embedding_model",
+        "n_splits",
+        "seed",
+    ]
+]
+for column in ["f1_micro_mean", "f1_micro_std", "f1_micro_min", "f1_micro_max"]:
+    display_summary[column] = display_summary[column].map(lambda x: f"{x:.4f}")
+
+
+def markdown_table(df):
+    if df.empty:
+        return "_No rows._"
+
+    columns = list(df.columns)
+    lines = [
+        "| " + " | ".join(columns) + " |",
+        "| " + " | ".join(["---"] * len(columns)) + " |",
+    ]
+    for _, row in df.iterrows():
+        lines.append("| " + " | ".join(str(row[col]) for col in columns) + " |")
+    return "\n".join(lines)
+```
+
+## 概要
+
+`smdis_small` は、JMED-LLM の `datasets/smdis.csv` を使った小規模なマルチラベル分類実験です。
+Semaxis の `SupervisedTransformer` でテキストを特徴量に変換し、その特徴量に対して scikit-learn の線形分類器を学習します。
+
+評価は 5-fold cross validation で行い、各foldの test split に対する `f1_micro` を MLflow に記録しています。
+
+## パイプライン
+
+1. `download.py`: `sociocom/JMED-LLM` から `datasets/smdis.csv` を取得する。
+2. `preprocess.py`: 正解回答 `answer == "A"` の質問文から投稿本文とタグを抽出する。
+3. `split_folds.py`: `MultilabelStratifiedKFold(n_splits=5)` で fold 0-4 に分割する。
+4. `transform.py`: Semaxis の `SupervisedTransformer` でテキストを特徴量行列に変換する。
+5. `train.py`: `SGDClassifier` + `OneVsRestClassifier` を `GridSearchCV` で学習する。
+6. `evaluate.py`: 各foldの test split で `f1_micro` を算出し、MLflowに記録する。
+
+## 実験設定
+
+主な設定は以下です。`repo_id` と `filename` が、Semaxis の特徴生成で使ったlocal LLMを表します。
+
+- feature generator: `semaxis.SupervisedTransformer`
+- LLM backend: `llama-cpp-python`
+- NLI model: `akiFQC/bert-base-japanese-v3_nli-jsnli-jnli-jsick`
+- embedding model: `paraphrase-multilingual-MiniLM-L12-v2`
+- classifier: `OneVsRestClassifier(SGDClassifier(loss="log_loss", penalty="elasticnet", class_weight="balanced"))`
+- folds: 5
+- metric: `f1_micro`
+
+## 評価結果
+
+この表は `mlflow.db` に保存された evaluate run から生成しています。
+対象は `f1_micro` を持つFINISHED runのうち、`fold` 0-4 がそろった5-fold評価セットです。
+foldが欠けている実行や、過去に実行されたfold 0のみの evaluate run は結果表から除外しています。
+各foldの `repo_id`, `filename`, `n_features` などは、evaluate run の直前に実行された同じfoldの `train.py` と、そのtrainの直前に実行された同じfoldの `transform.py` から取得しています。
+`experiment_id` は、これらの主要パラメータが同じ5foldを1つの実験セットとしてまとめるためのIDです。
+
+```{python}
+if missing_folds:
+    display(Markdown(f"**注意:** fold {missing_folds} の evaluate run が見つかりません。"))
+
+display(Markdown(markdown_table(display_summary)))
+```
+
+## 再生成
+
+`readme.qmd` から `readme.md` を生成するには、プロジェクトルートで以下を実行します。
+
+```bash
+quarto render pipelines/smdis_small/readme.qmd
+```
+
+MLflowの結果を確認する場合は以下を使います。
+
+```bash
+uv run mlflow ui --backend-store-uri sqlite:///mlflow.db
+```
