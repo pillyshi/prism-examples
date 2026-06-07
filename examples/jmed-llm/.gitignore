@@ -2,6 +2,7 @@
 __pycache__/
 .claude/
 .env
+logs/
 
 mlflow.db
 mlruns/
