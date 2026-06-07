@@ -13,13 +13,9 @@ stage(
     name="smdis_small_split_folds"
 )
 
-PATH_ROWS = dep("artifacts/smdis_small/preprocess/rows.json")
-FOLDS = param("folds", [0, 1, 2, 3, 4])
-SEED = param("seed", 1)
 PATH_FOLDS = out("artifacts/smdis_small/split_folds/folds")
-PATH_MLB = out("artifacts/smdis_small/split_folds/mlb.joblib")
 
-with open(PATH_ROWS) as f:
+with open(dep("artifacts/smdis_small/preprocess/rows.json")) as f:
     rows = json.load(f)
 
 texts = []
@@ -33,7 +29,7 @@ labels = np.array(labels)
 mlb = MultiLabelBinarizer()
 labels_multi = mlb.fit_transform(labels)
 
-mskf = MultilabelStratifiedKFold(len(FOLDS), shuffle=True, random_state=SEED)
+mskf = MultilabelStratifiedKFold(len(param("folds", [0, 1, 2, 3, 4])), shuffle=True, random_state=param("seed", 1))
 for i, (itr, ite) in enumerate(mskf.split(texts, labels_multi)):
     Path(PATH_FOLDS).joinpath(f"fold_{i}").mkdir(parents=True, exist_ok=True)
     np.savez_compressed(
@@ -49,4 +45,4 @@ for i, (itr, ite) in enumerate(mskf.split(texts, labels_multi)):
         Y=labels_multi[ite]
     )
 
-joblib.dump(mlb, PATH_MLB)
+joblib.dump(mlb, out("artifacts/smdis_small/split_folds/mlb.joblib"))

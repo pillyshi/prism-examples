@@ -11,6 +11,4 @@ stage(
     name="smdis_small_download"
 )
 
-PATH_DATASET = out("datasets/smdis.csv")
-
-download_if_missing(PATH_DATASET, "datasets/smdis.csv")
+download_if_missing(out("datasets/smdis.csv"), "datasets/smdis.csv")

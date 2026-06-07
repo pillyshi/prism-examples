@@ -1,3 +1,11 @@
+.venv/
+__pycache__/
+.claude/
+.env
+
+mlflow.db
+mlruns/
+
 memo/
 datasets/
 
