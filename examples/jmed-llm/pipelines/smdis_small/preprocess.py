@@ -2,15 +2,9 @@ import json
 import csv
 from pathlib import Path
 
-from dvcgen import dep, out, stage
-
-
-stage(
-    name="smdis_small_preprocess"
-)
 
 text2tags = {}
-with open(dep("datasets/smdis.csv")) as f:
+with open("datasets/smdis.csv") as f:
     for row in csv.DictReader(f):
         if row["answer"] != "A":
             continue
@@ -18,7 +12,7 @@ with open(dep("datasets/smdis.csv")) as f:
         tags = text2tags.setdefault(post, list())
         tags.append(row["tag"])
 
-PATH_ROWS = Path(out("artifacts/smdis_small/preprocess/rows.json")).resolve()
+PATH_ROWS = Path("artifacts/smdis_small/preprocess/rows.json").resolve()
 PATH_ROWS.parent.mkdir(parents=True, exist_ok=True)
 with open(PATH_ROWS, "w") as f:
     json.dump([{

@@ -25,7 +25,7 @@ ssh: guard-HOST
 	ssh $(HOST)
 
 install: guard-HOST
-	$(call remote-exec,uv sync --extra $(EXTRA))
+	$(call remote-exec,uv sync)
 
 setup: install install-llama-cpp
 

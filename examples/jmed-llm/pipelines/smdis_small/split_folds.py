@@ -4,18 +4,13 @@ from pathlib import Path
 
 import joblib
 import numpy as np
-from dvcgen import param, out, dep, stage
 from sklearn.preprocessing import MultiLabelBinarizer
 from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
 
 
-stage(
-    name="smdis_small_split_folds"
-)
+PATH_FOLDS = "artifacts/smdis_small/split_folds/folds"
 
-PATH_FOLDS = out("artifacts/smdis_small/split_folds/folds")
-
-with open(dep("artifacts/smdis_small/preprocess/rows.json")) as f:
+with open("artifacts/smdis_small/preprocess/rows.json") as f:
     rows = json.load(f)
 
 texts = []
@@ -29,7 +24,7 @@ labels = np.array(labels)
 mlb = MultiLabelBinarizer()
 labels_multi = mlb.fit_transform(labels)
 
-mskf = MultilabelStratifiedKFold(len(param("folds", [0, 1, 2, 3, 4])), shuffle=True, random_state=param("seed", 1))
+mskf = MultilabelStratifiedKFold(5, shuffle=True, random_state=1)
 for i, (itr, ite) in enumerate(mskf.split(texts, labels_multi)):
     Path(PATH_FOLDS).joinpath(f"fold_{i}").mkdir(parents=True, exist_ok=True)
     np.savez_compressed(
@@ -45,4 +40,4 @@ for i, (itr, ite) in enumerate(mskf.split(texts, labels_multi)):
         Y=labels_multi[ite]
     )
 
-joblib.dump(mlb, out("artifacts/smdis_small/split_folds/mlb.joblib"))
+joblib.dump(mlb, "artifacts/smdis_small/split_folds/mlb.joblib")

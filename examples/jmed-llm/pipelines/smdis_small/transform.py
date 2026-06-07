@@ -5,18 +5,10 @@ from argparse import ArgumentParser
 
 import joblib
 import numpy as np
-from dvcgen import dep, param, out, stage
 from llama_cpp import Llama
 from semaxis import UnsupervisedTransformer, LlamaCppClient
 import mlflow
 
-
-FOLDS = param("folds", [0, 1, 2, 3, 4])
-
-stage(
-    name="smdis_small_transform",
-    foreach=FOLDS,
-)
 
 parser = ArgumentParser()
 parser.add_argument("--fold", type=int, default=0)
@@ -46,9 +38,9 @@ with mlflow.start_run():
     # n_ctx=2^12, n_features=2^5 -> OK
     # n_ctx=2^12, n_features=2^6 -> OK? ダメな時もある
     tokens_per_hypothesis = mlflow.log_param("tokens_per_hypothesis", 50)  # 50 ~ 150
-    n_features = mlflow.log_param("n_features", 2 ** 4)
+    n_features = mlflow.log_param("n_features", 2 ** 3)
     output_budget = n_features * tokens_per_hypothesis
-    n_ctx = mlflow.log_param("n_ctx", 2 ** 11)
+    n_ctx = mlflow.log_param("n_ctx", 2 ** 10)
     if n_ctx - output_budget < 0:
         raise ValueError(f"{n_ctx - output_budget}")
 
