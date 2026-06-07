@@ -6,7 +6,7 @@ from argparse import ArgumentParser
 import joblib
 import numpy as np
 from llama_cpp import Llama
-from semaxis import UnsupervisedTransformer, LlamaCppClient
+from semaxis import SupervisedTransformer, UnsupervisedTransformer, LlamaCppClient
 import mlflow
 
 
@@ -40,37 +40,45 @@ with mlflow.start_run():
     tokens_per_hypothesis = mlflow.log_param("tokens_per_hypothesis", 50)  # 50 ~ 150
     n_features = mlflow.log_param("n_features", 2 ** 3)
     output_budget = n_features * tokens_per_hypothesis
-    n_ctx = mlflow.log_param("n_ctx", 2 ** 10)
+    n_ctx = mlflow.log_param("n_ctx", 2 ** 12)
     if n_ctx - output_budget < 0:
         raise ValueError(f"{n_ctx - output_budget}")
 
     llm = LlamaCppClient(Llama.from_pretrained(
-        # repo_id=mlflow.log_param("repo_id", "unsloth/gemma-4-E4B-it-qat-GGUF"),
-        # filename=mlflow.log_param("filename", "gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf"),
+        repo_id=mlflow.log_param("repo_id", "unsloth/gemma-4-E4B-it-qat-GGUF"),
+        filename=mlflow.log_param("filename", "gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf"),
     	# repo_id=mlflow.log_param("repo_id", "unsloth/gemma-4-E2B-it-qat-GGUF"),
     	# filename=mlflow.log_param("filename", "gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf"),
-        repo_id=mlflow.log_param("repo_id", "unsloth/gemma-4-12B-it-qat-GGUF"),
-        filename=mlflow.log_param("filename", "gemma-4-12B-it-qat-UD-Q4_K_XL.gguf"),
+        # repo_id=mlflow.log_param("repo_id", "unsloth/gemma-4-12B-it-qat-GGUF"),
+        # filename=mlflow.log_param("filename", "gemma-4-12B-it-qat-UD-Q4_K_XL.gguf"),
         # repo_id=mlflow.log_param("repo_id", "unsloth/Qwen3.5-9B-GGUF"),
-        # filename=mlflow.log_param("filename", "Qwen3.5-9B-Q4_K_M.gguf"),
-        # repo_id=mlflow.log_param("repo_id", "bartowski/Qwen2.5.1-Coder-7B-Instruct-GGUF"),
-        # filename=mlflow.log_param("filename", "Qwen2.5.1-Coder-7B-Instruct-Q4_K_M.gguf"),
-        # repo_id=mlflow.log_param("repo_id", "unsloth/gemma-3-4b-it-qat-GGUF"),
-	    # filename=mlflow.log_param("filename", "gemma-3-4b-it-qat-UD-Q8_K_XL.gguf"),
-        n_ctx=n_ctx
+        # filename=mlflow.log_param("filename", "Qwen3.5-9B-UD-Q4_K_XL.gguf"),
+        n_ctx=n_ctx,
+        n_gpu_layers=-1,
+        flash_attn=True
     ))
 
-    transformer = UnsupervisedTransformer(
+    transformer = SupervisedTransformer(
         llm=llm,
-        context_limit=n_ctx - output_budget,
         nli_model=mlflow.log_param("nli_model", "akiFQC/bert-base-japanese-v3_nli-jsnli-jnli-jsick"),
         n_features=n_features,
+        context_limit=n_ctx - output_budget,
         language="Japanese",
         seed=mlflow.log_param("seed", 1),
         sample_method=mlflow.log_param("sample_method", "random"),
         embedding_model=mlflow.log_param("embedding_model", "paraphrase-multilingual-MiniLM-L12-v2")
     )
-    transformer.fit(train["texts"])
+    # transformer = UnsupervisedTransformer(
+    #     llm=llm,
+    #     context_limit=n_ctx - output_budget,
+    #     nli_model=mlflow.log_param("nli_model", "akiFQC/bert-base-japanese-v3_nli-jsnli-jnli-jsick"),
+    #     n_features=n_features,
+    #     language="Japanese",
+    #     seed=mlflow.log_param("seed", 1),
+    #     sample_method=mlflow.log_param("sample_method", "random"),
+    #     embedding_model=mlflow.log_param("embedding_model", "paraphrase-multilingual-MiniLM-L12-v2")
+    # )
+    transformer.fit(train["texts"], train["Y"])
     Path(PATH_TRANSFORMED_TRAIN).parent.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(
         PATH_TRANSFORMED_TRAIN,
