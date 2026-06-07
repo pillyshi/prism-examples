@@ -55,6 +55,7 @@ foldが欠けている実行や、過去に実行されたfold 0のみの evalua
 | experiment_id | f1_micro_mean | f1_micro_std | f1_micro_min | f1_micro_max | repo_id | filename | n_features | n_ctx | tokens_per_hypothesis | nli_model | embedding_model | n_splits | seed |
 |----|----|----|----|----|----|----|----|----|----|----|----|----|----|
 | 1 | 0.7006 | 0.0598 | 0.6207 | 0.7573 | unsloth/gemma-4-E4B-it-qat-GGUF | gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf | 16 | 4096 | 50 | akiFQC/bert-base-japanese-v3_nli-jsnli-jnli-jsick | paraphrase-multilingual-MiniLM-L12-v2 | 5 | 1 |
+| 2 | 0.6708 | 0.1183 | 0.5414 | 0.8222 | unsloth/gemma-4-E4B-it-qat-GGUF | gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf | 8 | 4096 | 50 | akiFQC/bert-base-japanese-v3_nli-jsnli-jnli-jsick | paraphrase-multilingual-MiniLM-L12-v2 | 5 | 1 |
 
 ## 再生成
 
